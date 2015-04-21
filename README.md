@@ -1,2 +1,0 @@
-# construirtv
-Construir TV

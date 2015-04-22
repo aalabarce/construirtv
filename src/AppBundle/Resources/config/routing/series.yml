@@ -1,0 +1,30 @@
+series:
+    path:     /
+    defaults: { _controller: "AppBundle:Series:index" }
+
+series_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Series:show" }
+
+series_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Series:new" }
+
+series_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Series:create" }
+    methods:  POST
+
+series_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Series:edit" }
+
+series_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Series:update" }
+    methods:  [POST, PUT]
+
+series_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Series:delete" }
+    methods:  [POST, DELETE]

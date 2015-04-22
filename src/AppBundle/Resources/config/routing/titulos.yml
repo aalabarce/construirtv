@@ -1,0 +1,30 @@
+titulos:
+    path:     /
+    defaults: { _controller: "AppBundle:Titulos:index" }
+
+titulos_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Titulos:show" }
+
+titulos_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Titulos:new" }
+
+titulos_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Titulos:create" }
+    methods:  POST
+
+titulos_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Titulos:edit" }
+
+titulos_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Titulos:update" }
+    methods:  [POST, PUT]
+
+titulos_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Titulos:delete" }
+    methods:  [POST, DELETE]

@@ -1,0 +1,12 @@
+app_titulos:
+    resource: "@AppBundle/Resources/config/routing/titulos.yml"
+    prefix:   /titulos
+
+app_series:
+    resource: "@AppBundle/Resources/config/routing/series.yml"
+    prefix:   /series
+
+app_generos:
+    resource: "@AppBundle/Resources/config/routing/generos.yml"
+    prefix:   /generos
+

@@ -1,0 +1,32 @@
+{% extends '::base_crud.html.twig' %}
+
+{% block body -%}
+    <h1>Generos</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('generos') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('generos_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

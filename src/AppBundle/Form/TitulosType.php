@@ -25,6 +25,8 @@ class TitulosType extends AbstractType
             ->add('destacado')
             ->add('genero')
             ->add('serie')
+            ->add('upload_photo', new UploadPhotoType())
+
         ;
     }
     

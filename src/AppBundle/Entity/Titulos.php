@@ -64,6 +64,13 @@ class Titulos
      */
     private $serie;
 
+    /**
+     * @var integer
+     */
+    private $image;
+
+
+
 
     /**
      * Set nombre
@@ -303,5 +310,25 @@ class Titulos
     public function getSerie()
     {
         return $this->serie;
+    }
+
+    /**
+     * Set image
+     *
+     * @return integer 
+     */
+    public function setUploadPhoto($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * Get image
+     *
+     * @return integer 
+     */
+    public function getUploadPhoto()
+    {
+        return $this->image;
     }
 }

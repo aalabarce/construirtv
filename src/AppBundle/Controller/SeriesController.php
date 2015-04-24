@@ -15,6 +15,12 @@ use AppBundle\Form\SeriesType;
 class SeriesController extends Controller
 {
 
+    public function obtenerSeriesAction()
+    {
+       
+    }
+
+    
     /**
      * Lists all Series entities.
      *

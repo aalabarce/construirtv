@@ -1,4 +1,3 @@
-
 {% if form is defined %}
    {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% endif %}
@@ -20,9 +19,6 @@
     <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}">
     <link rel="stylesheet" href="{{ asset('css/metisMenu.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/uploadfile.min.css') }}">
-
-    <script src="{{ asset('js/lib/jquery-1.11.2.min.js') }}"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -387,12 +383,13 @@
     <!-- /#wrapper -->
 
     {% block javascripts %}{% endblock %}
+    <script src="{{ asset('js/lib/jquery-1.11.2.min.js') }}"></script>
     <script src="{{ asset('js/lib/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lib/sb-admin-2.js') }}"></script>
     <script src="{{ asset('js/lib/metisMenu.js') }}"></script>
-    <script src="{{ asset('js/lib/jquery.uploadfile.min.js') }}"></script>
     
 
 </body>
 
 </html>
+>>>>>>> origin/master

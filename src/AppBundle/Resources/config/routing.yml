@@ -9,4 +9,3 @@ app_series:
 app_generos:
     resource: "@AppBundle/Resources/config/routing/generos.yml"
     prefix:   /generos
-

@@ -5,3 +5,20 @@ app:
 blood_window_bw:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   admin/
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+fos_oauth_server_authorize:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+
+api_articles:
+    path:     api/articles
+    defaults: { _controller: "AppBundle:Api:articles" }
+
+api_user:
+    path:     api/user
+    defaults: { _controller: "AppBundle:Api:user" }

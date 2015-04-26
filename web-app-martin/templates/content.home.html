@@ -1,0 +1,76 @@
+<!--slider -->
+<article class="slide">
+	<section class="block">
+		<carousel interval="myInterval" ng-show="showCarousel" class="carousel slide fade-in">
+	        <!-- Preloader -->
+	        <div class="preloader" ng-hide="slides">
+	            <img ng-src="/web/bundles/bloodwindowbw/theme/images/loader.GIF" width="24px" height="24px">
+	        </div>
+	        <!-- /Preloader -->
+		  	<slide ng-repeat="slide in slides" active="slide.active" ng-click="openCortoDetail(slide.id)" class="pointerCursor">
+            	<div class="desc-item col-lg-6 col-md-6 hidden-sm hidden-xs" style="text-align: left;">
+            		<h1>{{slide.titulo}}</h1>
+            		<div class="info-item">
+            			<!--<h2>{{slide.name}}</h2>-->
+            			<!-- Show for Spanish -->
+            			<p ng-show="language == 'esp' && slide.sinopsisEspaniol">{{slide.sinopsisEspaniol}}</p>
+            			<!-- Show for English -->
+            			<p ng-show="language == 'eng' && slide.sinopsisIngles">{{slide.sinopsisIngles}}</p>
+						<div class="detail-info-item">
+							<p class="director" ng-show="slide.director">{{languageHome.director}}: <b>{{slide.director}}</b> </p>
+							<p class="duracion" ng-show="slide.duracion">{{languageHome.duration}}: <b>{{slide.duracion}} min</b></p>
+							<p class="festival" ng-show="slide.festival">{{languageHome.festival}}: <b>{{slide.festival}}</b></p>
+						</div>
+            		</div>
+            	</div>
+                <img ng-src="{{imagesSrc}}/carousel/{{slide.id}}.jpg" alt="Slide{{slide.id}}" />
+		  	</slide>
+		</carousel>
+		<!-- Show when user is searching for something -->
+		<div class=".col-lg-12 col-md-12 col-sm-12 col-xs-12 resu">
+			<p ng-hide="showCarousel">{{languageHome.resultsText}}: {{searchInputText}}</p>
+		</div>
+	</section>
+</article>
+<section class="cat-movies">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+		<ul class="nav nav-tabs listado-tabs" role="tablist" style="cursor: pointer;">
+			<li ng-class="{active: '' == searchFestival}" ng-click="setCurrentFestival('')">
+				<a ng-show="language == 'eng'">All festivals</a>
+				<a ng-show="language == 'esp'">Todos</a>
+			</li>
+			<li ng-repeat="festival in festivals" ng-class="{active: '{{festival.id}}' == searchFestival}" ng-click="setCurrentFestival(festival.id)"><a>{{festival.nombre}}</a></li>
+		</ul>
+		<div class="tab-content">
+	      <div class="tab-pane fade active in">
+	        <div class="item-listado-tab">
+	        	<h1 ng-show="filterCortos.length == 0">{{languageHome.noResultsText}}</h1>
+		        <!-- Preloader -->
+		        <div class="preloader" ng-show="showPreloader">
+		        	<br />
+		            <img ng-src="/web/bundles/bloodwindowbw/theme/images/loader.GIF" width="24px" height="24px">
+		            <br />
+		            <br />
+		        </div>
+		        <!-- /Preloader -->
+	        	<div class="col-xs-12 col-sm-6 col-lg-4 thumb fade-in result{{$index}}" ng-repeat="corto in filterCortos">
+	        		<a ng-click="openCortoDetail(corto.id)">
+	        			<div class="desc-item-listado pointerCursor">
+	        				<h3>{{corto.titulo}}</h3>
+			                <!-- Show for Spanish -->
+			    			<p ng-show="language == 'esp' && corto.nombreEspaniol">{{languageHome.gender}}: <span>{{corto.nombreEspaniol}}</span></p>
+			                <!-- Show for English -->
+			                <p ng-show="language == 'eng' && corto.nombreIngles">{{languageHome.gender}}: <span>{{corto.nombreIngles}}</span></p>
+	        				<p ng-show="corto.anio">{{languageHome.year}}: <span>{{corto.anio}}</span></p>
+	        				<p ng-show="corto.director">{{languageHome.director}}: <span>{{corto.director}}</span></p>
+	        				<p ng-show="corto.festival">{{languageHome.festival}}: <span>{{corto.festival}}</span></p>
+	        			</div>
+	        			<img ng-src="{{imagesSrc}}/{{corto.id}}.jpg" class="img-responsive">
+	        		</a>
+	        	</div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</section>

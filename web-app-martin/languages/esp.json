@@ -1,0 +1,72 @@
+{
+  "header":
+  {
+    "inputSearch" : "Buscar por género, director, año o título",
+    "menu" : [
+      {
+        "title" : "Inicio",
+        "url" : "/"
+      },
+      {
+        "title" : "Titulos",
+        "url" : "/titles"
+      },
+      {
+        "title" : "Registro",
+        "url" : "/register"
+      }
+    ]
+  },
+  "home":
+  {
+    "resultsText" : "Resultados de",
+    "noResultsText" : "No se encontraron resultados",
+    "director" : "Director",
+    "duration" : "Duración",
+    "festival" : "Festival",
+    "gender" : "Género",
+    "year" : "Año"
+  },
+  "tituloDetail":
+  {
+    "director" : "Director",
+    "duration" : "Duración",
+    "festival" : "Festival",
+    "gender" : "Género",
+    "year" : "Año",
+    "cast" : "Reparto",
+    "company" : "Compañia",
+    "phone" : "Teléfono",
+    "error" : "No se encontro el corto, vuelva a intentarlo mas tarde..."
+  },
+  "register":
+  {
+    "title" : "Proyectos en desarrollo",
+    "director" : "Director",
+    "country" : "País",
+    "duration" : "Duración"
+  },
+  "login":
+  {
+    "projectTitle" : "Título proyecto",
+    "countryMajorityProducer" : "País productor mayoritario",
+    "year" : "Año",
+    "duration" : "Duración",
+    "synopsis" : "Sinopsis",
+    "budget" : "Presupuesto",
+    "budgetAcquired" : "Presupuesto adquirido",
+    "financing" : "Financiación",
+    "company" : "Compañía",
+    "mail" : "E-Mail",
+    "phone" : "Teléfono",
+    "website" : "Website",
+    "objective" : "Objetivo",
+    "projectStatus" : "Estado del proyecto",
+    "directorsVision" : "Visión del director",
+    "directorsName" : "Nombre director",
+    "directorsCV" : "Curriculum del director",
+    "producersName" : "Nombre del productor",
+    "producersCV" : "Curriculum del productor",
+    "error" : "No se encontro el proyecto en desarrollo, vuelva a intentarlo mas tarde..."
+  }
+}

@@ -132,6 +132,7 @@ angular.module('construirTVControllers', [])
         })
         .error(function(data, status){
             $scope.showErrors = data; //CHECK THIS
+            alert(data);
             console.log(data, status); //remove for production
       });
       // ***** END API *****

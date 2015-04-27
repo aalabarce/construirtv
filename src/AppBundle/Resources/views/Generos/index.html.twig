@@ -7,7 +7,6 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Id</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -15,16 +14,8 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('generos_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
-                <td>{{ entity.id }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('generos_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('generos_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <a href="{{ path('generos_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
                 </td>
             </tr>
         {% endfor %}

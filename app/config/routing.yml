@@ -22,3 +22,28 @@ api_articles:
 api_user:
     path:     api/user
     defaults: { _controller: "AppBundle:Api:user" }
+
+api_series_all:
+    path:     api/series
+    defaults: { _controller: "AppBundle:Api:obtenerSeries" }
+    methods:  GET    
+
+api_generos_all:
+    path:     api/generos
+    defaults: { _controller: "AppBundle:Api:obtenerGeneros" }
+    methods:  GET        
+
+api_titulos_serie:
+    path: api/titulos
+    defaults: { _controller: "AppBundle:Api:obtenerTitulos" }
+    methods: GET
+
+api_titulo_detalle:
+    path: api/titulos/{id}
+    defaults: { _controller: "AppBundle:Api:obtenerDetalleTitulo" }
+    methods: GET
+
+api_titulos_destacados:
+    path: api/titulos/destacados
+    defaults: { _controller: "AppBundle:Api:obtenerTitulosDestacados" }
+    methods: GET    

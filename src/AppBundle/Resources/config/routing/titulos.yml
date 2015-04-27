@@ -28,3 +28,8 @@ titulos_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:Titulos:delete" }
     methods:  [POST, DELETE]
+
+titulos_toggle_destacado:
+    path: /toggle_destacado/{id}
+    defaults: { _controller: "AppBundle:Titulos:toggleDestacado" }
+    methods: POST

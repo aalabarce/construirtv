@@ -205,6 +205,34 @@ class TitulosController extends Controller
         return $this->redirect($this->generateUrl('titulos'));
     }
 
+    public function toggleDestacadoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $titulo = $em->getRepository('AppBundle:Titulos')->find($id);
+
+        if (!$titulo) {
+            $jsonContent = '{ "result": "failure" }';
+            $response = new Response($jsonContent);
+            $response->headers->set('Content-Type', 'application/json');
+        }
+
+        if ($titulo->getDestacado())
+        {
+            $destacado = 0;
+        }
+        else 
+        {
+            $destacado = 1;
+        }
+
+        $product->setDestacado($destacado);
+        $em->flush();
+
+        $jsonContent = '{ "result": "success" }';
+        $response = new Response($jsonContent);
+        $response->headers->set('Content-Type', 'application/json');
+    }
+
     /**
      * Creates a form to delete a Titulos entity by id.
      *

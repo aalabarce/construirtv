@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Titulos list</h1>
 
-    <table class="records_list">
+    <table class="records_list table table-striped table-bordered table-condensed table-hover">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -14,7 +14,6 @@
                 <th>Sinopsis</th>
                 <th>Urlvimeo</th>
                 <th>Destacado</th>
-                <th>Id</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -29,16 +28,8 @@
                 <td>{{ entity.sinopsis }}</td>
                 <td>{{ entity.urlVimeo }}</td>
                 <td>{{ entity.destacado }}</td>
-                <td>{{ entity.id }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('titulos_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('titulos_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <a href="{{ path('titulos_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
                 </td>
             </tr>
         {% endfor %}

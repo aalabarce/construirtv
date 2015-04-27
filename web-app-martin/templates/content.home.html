@@ -40,7 +40,7 @@
 				<a ng-show="language == 'eng'">All festivals</a>
 				<a ng-show="language == 'esp'">Todos</a>
 			</li>
-			<li ng-repeat="festival in festivals" ng-class="{active: '{{festival.id}}' == searchFestival}" ng-click="setCurrentFestival(festival.id)"><a>{{festival.nombre}}</a></li>
+			<li ng-repeat="gender in genders" ng-class="{active: '{{gender.id}}' == searchFestival}" ng-click="setCurrentGender(gender.id)"><a>{{gender.nombre}}</a></li>
 		</ul>
 		<div class="tab-content">
 	      <div class="tab-pane fade active in">
@@ -54,7 +54,7 @@
 		            <br />
 		        </div>
 		        <!-- /Preloader -->
-	        	<div class="col-xs-12 col-sm-6 col-lg-4 thumb fade-in result{{$index}}" ng-repeat="corto in filterCortos">
+	        	<div class="col-xs-12 col-sm-6 col-lg-4 thumb fade-in result{{$index}}" ng-repeat="corto in filterTitles">
 	        		<a ng-click="openCortoDetail(corto.id)">
 	        			<div class="desc-item-listado pointerCursor">
 	        				<h3>{{corto.titulo}}</h3>
@@ -63,10 +63,11 @@
 			                <!-- Show for English -->
 			                <p ng-show="language == 'eng' && corto.nombreIngles">{{languageHome.gender}}: <span>{{corto.nombreIngles}}</span></p>
 	        				<p ng-show="corto.anio">{{languageHome.year}}: <span>{{corto.anio}}</span></p>
-	        				<p ng-show="corto.director">{{languageHome.director}}: <span>{{corto.director}}</span></p>
+	        				<p ng-show="corto.nombre">{{languageHome.nombre}}: <span>{{corto.nombre}}</span></p>
 	        				<p ng-show="corto.festival">{{languageHome.festival}}: <span>{{corto.festival}}</span></p>
 	        			</div>
-	        			<img ng-src="{{imagesSrc}}/{{corto.id}}.jpg" class="img-responsive">
+	        			<!-- <img ng-src="{{imagesSrc}}/{{corto.id}}.jpg" class="img-responsive"> -->
+	        			<img ng-src="http://construirtv.com/images/elCanal-1.png" class="img-responsive">
 	        		</a>
 	        	</div>
 	        </div>

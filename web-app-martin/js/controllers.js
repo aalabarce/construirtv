@@ -152,12 +152,12 @@ angular.module('construirTVControllers', [])
   $rootScope.currentUrl = "/";
   window.scrollTo(0,0);
 
-  // ***** START API ***** Get Carousel Cortos
+  // ***** START API ***** Get Destacados titles */*/*/*/*/NOT FINISHED/*/*/*/*/*/
   $scope.slides = "";
-  $scope.getCarouselCortos = function() {
+  $scope.getDestacados = function() {
     $http({
-    method: 'POST',
-    url: $rootScope.serverURL + "/buscar/corto/carousel"
+    method: 'GET',
+    url: $rootScope.serverURL + "/api/titulos/destacados"
     })
     .success(function(data, status){
         $scope.slides = data;
@@ -169,9 +169,9 @@ angular.module('construirTVControllers', [])
   }
   // ***** END API *****
 
-  // ***** START API ***** Get All Cortos with filters
-  $scope.filterCortos = true; // Set var to true for not showing error message
-  $scope.getFilterCortos = function() {
+  // ***** START API ***** Get All titles with filters */*/*/*/*/NOT FINISHED/*/*/*/*/*/
+  $scope.filterTitles = true; // Set var to true for not showing error message
+  $scope.getFilterTitles = function() {
     $scope.showPreloader = true; // Show preloader gif
     $scope.searchGenero = ""; // Edit stored parameters
     $scope.sendToAPI = '{"inputBuscador": "' + $scope.searchBuscador + '", "genero": "' + $scope.searchGenero + '", "festival": "' + $scope.searchFestival + '"}'; // inputBuscador take the value of 'titulo', 'anio' and 'director'
@@ -181,37 +181,58 @@ angular.module('construirTVControllers', [])
         data: $scope.sendToAPI
     })
     .success(function(data, status){
-        $scope.filterCortos = data;
+        $scope.filterTitles = data;
         $scope.showPreloader = false; // Hide preloader gif
         console.log(data, status);  //remove for production
     })
     .error(function(data, status){
-        $scope.filterCortos = ""; // Set var to lenght cero for showing error message
+        $scope.filterTitles = ""; // Set var to lenght cero for showing error message
         $scope.showPreloader = false; // Hide preloader gif
         console.log(data, status); //remove for production
     });
   }
   // ***** END API *****
 
-  // ***** START API ***** Get all Festivals for filter
-  $scope.festivals = "";
-  $scope.getAllFestivals = function() {
+  // ***** START API ***** Get all Genders for filter
+  $scope.genders = "";
+  $scope.getAllGenders = function() {
     $http({
-    method: 'POST',
-    url: $rootScope.serverURL + "/buscar/festival"
+        method: 'GET',
+        url: $rootScope.serverURL + "/api/generos"
     })
     .success(function(data, status){
-        $scope.festivals = data;
+        $scope.genders = data;
         console.log(data, status);  //remove for production
     })
     .error(function(data, status){
+        console.log(data, status); //remove for production
+    });
+  }
+  // ***** END API *****
+
+  // ***** START API ***** Get all titles from gender ///// If filterTitles empty show error in html, if not empty show results
+  $scope.filterTitles = true; // Set var to true for not showing error message
+  $scope.getTitlesFromGender = function(genderID) {
+    $scope.showPreloader = true; // Show preloader gif
+    $http({
+        method: 'GET',
+        url: $rootScope.serverURL + "/api/titulos?serie_id=" + genderID
+    })
+    .success(function(data, status){
+        $scope.filterTitles = data;
+        $scope.showPreloader = false; // Hide preloader gif
+        console.log(data, status);  //remove for production
+    })
+    .error(function(data, status){
+        $scope.filterTitles = ""; // Set var to lenght cero for showing error message
+        $scope.showPreloader = false; // Hide preloader gif
         console.log(data, status); //remove for production
     });
   }
   // ***** END API *****
 
   // ***** START CAROUSEL *****
-  $scope.getCarouselCortos();
+  $scope.getDestacados();
   $scope.myInterval = 5000;
 
   // ***** END CAROUSEL *****
@@ -225,27 +246,20 @@ angular.module('construirTVControllers', [])
     else $scope.showCarousel = true;
     //$scope.searchFestival = ""; uncoment for reseting festivals to all
     $scope.searchBuscador = $rootScope.searchInputText;
-    $scope.getFilterCortos(); // This function will be call when controller is called and when $rootScope.searchInputText changes.
+    $scope.getFilterTitles(); // This function will be call when controller is called and when $rootScope.searchInputText changes.
 
   });
   // ***** END INPUT SEARCH RESULT *****
 
-  // ***** START RESULT TABS *****
-  $scope.searchFestival = "";
+  // ***** START RESULT GENDER TABS *****
+  $scope.searchGender = "";
   $scope.searchBuscador = "";
-  $scope.getAllFestivals();
-  $scope.setCurrentFestival = function(value) {
-    $scope.searchFestival = value;
-    $scope.getFilterCortos();
+  $scope.getAllGenders();
+  $scope.setCurrentGender = function(value) {
+    $scope.searchGender = value;
+    $scope.getTitlesFromGender(value);
   }
   // ***** END RESULT TABS *****
-
-  // ***** START SHOW PARAMETER CORTO ID DETAIL *****
-  $scope.id = $routeParams.cortoId;
-  if($scope.id) {
-    $scope.openCortoDetail($scope.id);
-  }
-  // ***** END SHOW PARAMETER CORTO ID DETAIL *****
 
 }])
 

@@ -180,6 +180,32 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
         return $user;
     }
 
+        /**
+     * Loads a user by username or email
+     *
+     * It is strongly discouraged to call this method manually as it bypasses
+     * all ACL checks.
+     *
+     * @deprecated Use FOS\UserBundle\Security\UserProvider instead
+     *
+     * @param string $username
+     *
+     * @return UserInterface
+     */
+    public function loadUserByUsernameOrEmail($username)
+    {
+        trigger_error('Using the UserManager as user provider is deprecated. Use FOS\UserBundle\Security\UserProvider instead.', E_USER_DEPRECATED);
+
+        $user = $this->findUserByUsernameOrEmail($username);
+
+        if (!$user) {
+            throw new UsernameNotFoundException(sprintf('No user with name "%s" was found.', $username));
+        }
+
+        return $user;
+    }
+
+
     /**
      * {@inheritDoc}
      */

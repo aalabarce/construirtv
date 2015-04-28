@@ -86,7 +86,7 @@ class OAuth2
      *
      * @see OAuth2::setDefaultOptions()
      */
-    const DEFAULT_ACCESS_TOKEN_LIFETIME = 36000;
+    const DEFAULT_ACCESS_TOKEN_LIFETIME = 1209600;
 
     /**
      * Default refresh token lifetime.

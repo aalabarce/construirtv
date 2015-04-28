@@ -45,8 +45,6 @@ angular.module('construirTVControllers', [])
         url: $rootScope.serverURL + "/api/articles?access_token=" + window.localStorage['access_token']
         })
         .success(function(data, status){
-            window.localStorage['user_name'] = data;
-            $rootScope.userName = window.localStorage['user_name'];
             console.log(data, status);  //remove for production
         })
         .error(function(data, status){
@@ -69,6 +67,24 @@ angular.module('construirTVControllers', [])
   }
   // ***** END LOGOUT USER *****
 
+  // ***** REGISTER USER *****
+  $scope.registerNewUser = function(email, username, passFirst, passSecond) {
+    $scope.sendToAPI = '{"fos_user_registration_form[email]": "' + email + '", "fos_user_registration_form[username]": "' + username + '", "fos_user_registration_form[plainPassword][first]": "' + passFirst + '", "fos_user_registration_form[plainPassword][second]": "' + passSecond + '"}';
+    $http({
+        method: 'POST',
+        url: $rootScope.serverURL + "/register/",
+        data: $scope.sendToAPI
+    })
+    .success(function(data, status){
+        alert('yeah ' + data);
+        console.log(data, status);  //remove for production       
+    })
+    .error(function(data, status){
+        alert('nope ' + data);
+        console.log(data, status); //remove for production
+    });
+  }
+  // ***** END REGISTER USER *****
 
 }])
 
@@ -128,6 +144,9 @@ angular.module('construirTVControllers', [])
         url: $rootScope.serverURL + "/oauth/v2/token?client_id=" + $rootScope.client_id + "&client_secret=" + $rootScope.client_secret + "&grant_type=password&username=" + email + "&password=" + password
         })
         .success(function(data, status){
+            // Save user name in local storage
+            window.localStorage['user_name'] = data.user;
+            $rootScope.userName = window.localStorage['user_name'];
             // Save token in local storage
             window.localStorage['access_token'] = data.access_token;
             // Close modal

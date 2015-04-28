@@ -1,7 +1,7 @@
 {
   "header":
   {
-    "inputSearch" : "Buscar por género, director, año o título",
+    "inputSearch" : "Buscar por género, serie o título",
     "menu" : [
       {
         "title" : "Inicio",
@@ -21,23 +21,21 @@
   {
     "resultsText" : "Resultados de",
     "noResultsText" : "No se encontraron resultados",
-    "director" : "Director",
     "duration" : "Duración",
-    "festival" : "Festival",
-    "gender" : "Género",
-    "year" : "Año"
+    "series" : "Serie",
+    "gender" : "Género"
   },
   "tituloDetail":
   {
-    "director" : "Director",
     "duration" : "Duración",
-    "festival" : "Festival",
+    "series" : "Serie",
+    "series_sinopsis" : "Sinopsis de la serie",
     "gender" : "Género",
-    "year" : "Año",
-    "cast" : "Reparto",
-    "company" : "Compañia",
-    "phone" : "Teléfono",
-    "error" : "No se encontro el corto, vuelva a intentarlo mas tarde..."
+    "season" : "Temporada",
+    "episode" : "Capítulo",
+    "subtitled" : "Subtitulado",
+    "sinopsis" : "Sinopsis",
+    "error" : "No se encontro el título deseado, vuelva a intentarlo mas tarde..."
   },
   "register":
   {
@@ -48,25 +46,6 @@
   },
   "login":
   {
-    "projectTitle" : "Título proyecto",
-    "countryMajorityProducer" : "País productor mayoritario",
-    "year" : "Año",
-    "duration" : "Duración",
-    "synopsis" : "Sinopsis",
-    "budget" : "Presupuesto",
-    "budgetAcquired" : "Presupuesto adquirido",
-    "financing" : "Financiación",
-    "company" : "Compañía",
-    "mail" : "E-Mail",
-    "phone" : "Teléfono",
-    "website" : "Website",
-    "objective" : "Objetivo",
-    "projectStatus" : "Estado del proyecto",
-    "directorsVision" : "Visión del director",
-    "directorsName" : "Nombre director",
-    "directorsCV" : "Curriculum del director",
-    "producersName" : "Nombre del productor",
-    "producersCV" : "Curriculum del productor",
-    "error" : "No se encontro el proyecto en desarrollo, vuelva a intentarlo mas tarde..."
+
   }
 }

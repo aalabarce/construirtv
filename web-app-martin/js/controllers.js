@@ -45,7 +45,8 @@ angular.module('construirTVControllers', [])
         url: $rootScope.serverURL + "/api/articles?access_token=" + window.localStorage['access_token']
         })
         .success(function(data, status){
-            $rootScope.userName = data; // CHECK THIS
+            window.localStorage['user_name'] = data;
+            $rootScope.userName = window.localStorage['user_name'];
             console.log(data, status);  //remove for production
         })
         .error(function(data, status){
@@ -61,7 +62,10 @@ angular.module('construirTVControllers', [])
 
   // ***** LOGOUT USER *****
   $scope.userLogout = function() {
+    $location.path("/").replace(); // If user logs out, redirect to home
     window.localStorage['access_token'] = "";
+    window.localStorage['user_name'] = "";
+    $rootScope.userName = window.localStorage['user_name'];
   }
   // ***** END LOGOUT USER *****
 
@@ -124,15 +128,16 @@ angular.module('construirTVControllers', [])
         url: $rootScope.serverURL + "/oauth/v2/token?client_id=" + $rootScope.client_id + "&client_secret=" + $rootScope.client_secret + "&grant_type=password&username=" + email + "&password=" + password
         })
         .success(function(data, status){
-            $rootScope.userName = data.user_name; // CHECK THIS
             // Save token in local storage
-            window.localStorage['access_token'] = data.access_token; //CHECK THIS
-            //window.localStorage['access_token'] = "YzZiYjhmNmIxYTcyMTY5MTU3MGQyYTJkZGNkMzM4N2JkZWZhNTBjYWYxNjA2MDM1NWNkMDcxMjYyM2VlYTNjNw";
+            window.localStorage['access_token'] = data.access_token;
+            // Close modal
+            $scope.cancel();
+            // Validate token
+            $rootScope.validateToken();
             console.log(data, status);  //remove for production
         })
         .error(function(data, status){
-            $scope.showErrors = data; //CHECK THIS
-            alert(data);
+            $scope.showErrors = data.error_description;
             console.log(data, status); //remove for production
       });
       // ***** END API *****
@@ -142,9 +147,6 @@ angular.module('construirTVControllers', [])
 }])
 
 // **************************************** HASTA ACA LLEGUE ****************************************
-// TODO:
-// * Guardar Usuario en local storage cuando se loguea o conecta
-// * 
 
 .controller('HomeCtrl', ['$scope', '$http', '$rootScope', '$modal', '$location', '$routeParams', function($scope, $http, $rootScope, $modal, $location, $routeParams) {
   // Set the value to variable for updating class active in header menu
@@ -152,7 +154,7 @@ angular.module('construirTVControllers', [])
   $rootScope.currentUrl = "/";
   window.scrollTo(0,0);
 
-  // ***** START API ***** Get Destacados titles */*/*/*/*/NOT FINISHED/*/*/*/*/*/
+  // ***** START API ***** Get Destacados titles */*/*/*/*/NOT FINISHED (BAD API)/*/*/*/*/*/
   $scope.slides = "";
   $scope.getDestacados = function() {
     $http({
@@ -169,7 +171,7 @@ angular.module('construirTVControllers', [])
   }
   // ***** END API *****
 
-  // ***** START API ***** Get All titles with filters */*/*/*/*/NOT FINISHED/*/*/*/*/*/
+  // ***** START API ***** Get All titles with filters */*/*/*/*/NOT FINISHED (API NOT DEVELOPED)/*/*/*/*/*/
   $scope.filterTitles = true; // Set var to true for not showing error message
   $scope.getFilterTitles = function() {
     $scope.showPreloader = true; // Show preloader gif
@@ -216,7 +218,7 @@ angular.module('construirTVControllers', [])
     $scope.showPreloader = true; // Show preloader gif
     $http({
         method: 'GET',
-        url: $rootScope.serverURL + "/api/titulos?serie_id=" + genderID
+        url: $rootScope.serverURL + "/api/titulos?serie_id=" + genderID // CHECK THIS
     })
     .success(function(data, status){
         $scope.filterTitles = data;
@@ -234,20 +236,20 @@ angular.module('construirTVControllers', [])
   // ***** START CAROUSEL *****
   $scope.getDestacados();
   $scope.myInterval = 5000;
-
   // ***** END CAROUSEL *****
 
-  // ***** START INPUT SEARCH RESULT *****
+  // ***** START INPUT SEARCH RESULT ***** */*/*/*/*/NOT FINISHED (API NOT DEVELOPED)/*/*/*/*/*/
   // Get value from input search and get data from API
   $scope.showCarousel = true;
-  $scope.$watch('searchInputText', function() {
-    window.scrollTo(0,0);
-    if($rootScope.searchInputText) $scope.showCarousel = false;
-    else $scope.showCarousel = true;
-    //$scope.searchFestival = ""; uncoment for reseting festivals to all
-    $scope.searchBuscador = $rootScope.searchInputText;
-    $scope.getFilterTitles(); // This function will be call when controller is called and when $rootScope.searchInputText changes.
-
+  $scope.$watch('searchInputText', function(newValue, oldValue) {
+    if (newValue !== oldValue) { // Ignore the initial load when watching model changes
+      window.scrollTo(0,0);
+      if($rootScope.searchInputText) $scope.showCarousel = false;
+      else $scope.showCarousel = true;
+      //$scope.searchFestival = ""; uncoment for reseting festivals to all
+      $scope.searchBuscador = $rootScope.searchInputText;
+      $scope.getFilterTitles(); // This function will be call when $rootScope.searchInputText changes.
+    }
   });
   // ***** END INPUT SEARCH RESULT *****
 
@@ -259,6 +261,7 @@ angular.module('construirTVControllers', [])
     $scope.searchGender = value;
     $scope.getTitlesFromGender(value);
   }
+  $scope.setCurrentGender('all'); // Get all titles from all genders
   // ***** END RESULT TABS *****
 
 }])

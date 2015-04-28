@@ -1,7 +1,7 @@
 {
   "header":
   {
-    "inputSearch" : "Search by genre, director, year, or title",
+    "inputSearch" : "Search by genre, series or title",
     "menu" : [
       {
         "title" : "Home",
@@ -21,23 +21,21 @@
   {
     "resultsText" : "Results for",
     "noResultsText" : "No results found",
-    "director" : "Director",
     "duration" : "Duration",
-    "festival" : "Festival",
-    "gender" : "Gender",
-    "year" : "Year"
+    "series" : "Series",
+    "gender" : "Gender"
   },
   "tituloDetail":
   {
-    "director" : "Director",
     "duration" : "Duration",
-    "festival" : "Festival",
+    "series" : "Series",
+    "series_sinopsis" : "serie's synopsis",
     "gender" : "Gender",
-    "year" : "Year",
-    "cast" : "Cast",
-    "company" : "Company",
-    "phone" : "Phone",
-    "error" : "No movie found, try again later..."
+    "season" : "Season",
+    "episode" : "Episode",
+    "subtitled" : "Subtitled",
+    "sinopsis" : "Synopsis",
+    "error" : "No title found, try again later..."
   },
   "register":
   {
@@ -48,25 +46,6 @@
   },
   "login":
   {
-    "projectTitle" : "Project title",
-    "countryMajorityProducer" : "Country Majority Producer",
-    "year" : "Year",
-    "duration" : "Duration",
-    "synopsis" : "Synopsis",
-    "budget" : "Budget",
-    "budgetAcquired" : "Budget acquired",
-    "financing" : "Financing",
-    "company" : "Company",
-    "mail" : "E-Mail",
-    "phone" : "Phone",
-    "website" : "Website",
-    "objective" : "Objective",
-    "projectStatus" : "Project status",
-    "directorsVision" : "Director's vision",
-    "directorsName" : "Director's name",
-    "directorsCV" : "Director's CV",
-    "producersName" : "Producer's name",
-    "producersCV" : "Producer's CV",
-    "error" : "No proyecto en desarrollo found, try again later..."
+
   }
 }

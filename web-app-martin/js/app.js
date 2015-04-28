@@ -61,7 +61,7 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
       $rootScope.client_secret = "1frw8e9jdcw08kcg844k8s8cksowk48gogo848soo4kkowc88k";
 
       // Declare user name
-      $rootScope.userName = "";
+      $rootScope.userName = window.localStorage['user_name'];
 
       //if($location.path())
       if($location.host() == "bloodwindow.tv") { // For production

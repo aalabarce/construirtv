@@ -36,8 +36,8 @@
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
 		<ul class="nav nav-tabs listado-tabs" role="tablist" style="cursor: pointer;">
-			<li ng-class="{active: '' == searchFestival}" ng-click="setCurrentFestival('')">
-				<a ng-show="language == 'eng'">All festivals</a>
+			<li ng-class="{active: 'all' == searchFestival}" ng-click="setCurrentGender('all')">
+				<a ng-show="language == 'eng'">All genders</a>
 				<a ng-show="language == 'esp'">Todos</a>
 			</li>
 			<li ng-repeat="gender in genders" ng-class="{active: '{{gender.id}}' == searchFestival}" ng-click="setCurrentGender(gender.id)"><a>{{gender.nombre}}</a></li>
@@ -45,7 +45,7 @@
 		<div class="tab-content">
 	      <div class="tab-pane fade active in">
 	        <div class="item-listado-tab">
-	        	<h1 ng-show="filterCortos.length == 0">{{languageHome.noResultsText}}</h1>
+	        	<h1 ng-show="filterTitles.length == 0">{{languageHome.noResultsText}}</h1>
 		        <!-- Preloader -->
 		        <div class="preloader" ng-show="showPreloader">
 		        	<br />
@@ -54,17 +54,13 @@
 		            <br />
 		        </div>
 		        <!-- /Preloader -->
-	        	<div class="col-xs-12 col-sm-6 col-lg-4 thumb fade-in result{{$index}}" ng-repeat="corto in filterTitles">
-	        		<a ng-click="openCortoDetail(corto.id)">
+	        	<div class="col-xs-12 col-sm-6 col-lg-4 thumb fade-in result{{$index}}" ng-repeat="title in filterTitles">
+	        		<a href="#titles/{{title.id}}">
 	        			<div class="desc-item-listado pointerCursor">
-	        				<h3>{{corto.titulo}}</h3>
-			                <!-- Show for Spanish -->
-			    			<p ng-show="language == 'esp' && corto.nombreEspaniol">{{languageHome.gender}}: <span>{{corto.nombreEspaniol}}</span></p>
-			                <!-- Show for English -->
-			                <p ng-show="language == 'eng' && corto.nombreIngles">{{languageHome.gender}}: <span>{{corto.nombreIngles}}</span></p>
-	        				<p ng-show="corto.anio">{{languageHome.year}}: <span>{{corto.anio}}</span></p>
-	        				<p ng-show="corto.nombre">{{languageHome.nombre}}: <span>{{corto.nombre}}</span></p>
-	        				<p ng-show="corto.festival">{{languageHome.festival}}: <span>{{corto.festival}}</span></p>
+	        				<h3>{{title.nombre}}</h3>
+	        				<p ng-show="title.genero">{{languageHome.gender}}: <span>{{title.genero.nombre}}</span></p>
+	        				<p ng-show="title.serie">{{languageHome.series}}: <span>{{title.serie.nombre}}</span></p>
+	        				<p ng-show="title.duracion">{{languageHome.duration}}: <span>{{title.duracion}}</span></p>
 	        			</div>
 	        			<!-- <img ng-src="{{imagesSrc}}/{{corto.id}}.jpg" class="img-responsive"> -->
 	        			<img ng-src="http://construirtv.com/images/elCanal-1.png" class="img-responsive">

@@ -8,21 +8,22 @@
 	        </div>
 	        <!-- /Preloader -->
 		  	<slide ng-repeat="slide in slides" active="slide.active" ng-click="openCortoDetail(slide.id)" class="pointerCursor">
-            	<div class="desc-item col-lg-6 col-md-6 hidden-sm hidden-xs" style="text-align: left;">
-            		<h1>{{slide.titulo}}</h1>
+            	<div class="desc-item col-lg-12 col-md-12 hidden-sm hidden-xs" style="text-align: left;">
+            		<h1>{{slide.nombre}}</h1>
             		<div class="info-item">
-            			<!--<h2>{{slide.name}}</h2>-->
-            			<!-- Show for Spanish -->
-            			<p ng-show="language == 'esp' && slide.sinopsisEspaniol">{{slide.sinopsisEspaniol}}</p>
-            			<!-- Show for English -->
-            			<p ng-show="language == 'eng' && slide.sinopsisIngles">{{slide.sinopsisIngles}}</p>
-						<div class="detail-info-item">
-							<p class="director" ng-show="slide.director">{{languageHome.director}}: <b>{{slide.director}}</b> </p>
-							<p class="duracion" ng-show="slide.duracion">{{languageHome.duration}}: <b>{{slide.duracion}} min</b></p>
-							<p class="festival" ng-show="slide.festival">{{languageHome.festival}}: <b>{{slide.festival}}</b></p>
+            			<div class="main-detail-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
+	            			<!--<h2>Historia Universal Construccion</h2>-->
+	            			<p>{{slide.sinopsis}}
+							</p>
+            			</div>
+						<div class="detail-info-item col-lg-3 col-md-3 col-sm-3 col-xs-3">
+							<p class="titulo-serie">Titulo de la serie: <b>{{slide.serie.nombre}}</b> </p>
+							<p class="genero">Genero: <b>{{slide.genero.nombre}}</b></p>
+							<p class="duracion">Duracion: <b>{{slide.duracion}}</b></p>
 						</div>
             		</div>
             	</div>
+
                 <img ng-src="{{imagesSrc}}/carousel/{{slide.id}}.jpg" alt="Slide{{slide.id}}" />
 		  	</slide>
 		</carousel>

@@ -520,8 +520,13 @@ article.slide .carousel .carousel-control {
     border: none;
     top: 0;
 }
-article.slide .carousel .carousel-control.left{}
-article.slide .carousel .carousel-control.right{}
+article.slide .carousel .carousel-control.left{
+	font-size: 35px;
+}
+article.slide .carousel .carousel-control.right{
+	font-size: 35px;
+	margin-right: 40px;
+}
 article.slide .carousel .item .desc-item{
 	position: absolute;
 	padding-left: inherit;

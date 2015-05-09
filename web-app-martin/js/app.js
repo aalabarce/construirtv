@@ -69,6 +69,6 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
         $rootScope.imagesSrc = "/uploads";
       } else { // For development
         $rootScope.serverURL = "/web/app_dev.php"; // URL for working local
-        $rootScope.imagesSrc = "/uploads";
+        $rootScope.imagesSrc = "/web-app-martin/uploads/";
       }
     }]);

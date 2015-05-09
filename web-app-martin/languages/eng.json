@@ -17,6 +17,10 @@
       }
     ]
   },
+  "search":
+  {
+    "inputSearch" : "Search by genre, series or title"
+  },
   "home":
   {
     "resultsText" : "Results for",

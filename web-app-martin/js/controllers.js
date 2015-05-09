@@ -10,16 +10,6 @@ angular.module('construirTVControllers', [])
   $rootScope.currentUrl = $location.path();
   $scope.isCollapsed = true; // Bootstrap header setting
    
-  $rootScope.searchInputText = ""; // Set var to emty string, because if not is 'undefined'
-  $scope.change = function () {
-    if (angular.isUndefined($scope.searchInput) || $scope.searchInput == null) {
-      $rootScope.searchInputText = "";
-    }
-    else {
-      $rootScope.searchInputText = $scope.searchInput;
-    }
-  }
-
   // ***** START OPEN MODAL LOGIN *****
   $scope.openLogin = function () {
 
@@ -67,25 +57,18 @@ angular.module('construirTVControllers', [])
   }
   // ***** END LOGOUT USER *****
 
-  // ***** REGISTER USER *****
-  $scope.registerNewUser = function(email, username, passFirst, passSecond) {
-    $scope.sendToAPI = '{"fos_user_registration_form[email]": "' + email + '", "fos_user_registration_form[username]": "' + username + '", "fos_user_registration_form[plainPassword][first]": "' + passFirst + '", "fos_user_registration_form[plainPassword][second]": "' + passSecond + '"}';
-    $http({
-        method: 'POST',
-        url: $rootScope.serverURL + "/register/",
-        data: $scope.sendToAPI
-    })
-    .success(function(data, status){
-        alert('yeah ' + data);
-        console.log(data, status);  //remove for production       
-    })
-    .error(function(data, status){
-        alert('nope ' + data);
-        console.log(data, status); //remove for production
-    });
-  }
-  // ***** END REGISTER USER *****
+}])
 
+.controller('SearchCtrl', ['$scope', '$http', '$rootScope', '$modal', '$location', '$routeParams', function($scope, $http, $rootScope, $modal, $location, $routeParams) {
+  $rootScope.searchInputText = ""; // Set var to emty string, because if not is 'undefined'
+  $scope.change = function () {
+    if (angular.isUndefined($scope.searchInput) || $scope.searchInput == null) {
+      $rootScope.searchInputText = "";
+    }
+    else {
+      $rootScope.searchInputText = $scope.searchInput;
+    }
+  }
 }])
 
 .controller('languageCtrl', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
@@ -100,7 +83,8 @@ angular.module('construirTVControllers', [])
     url: "languages/" + thisLanguage + ".json"
     })
     .success(function(data, status){
-        $rootScope.languageHeader = data.header; // All tags used in SidebarCtrl
+        $rootScope.languageHeader = data.header; // All tags used in HeaderCtrl
+        $rootScope.languageSearch = data.search; // All tags used in SearchCtrl
         $rootScope.languageLogIn = data.login; // All tags used in LoginCtrl
         $rootScope.languageHome = data.home; // All tags used in HomeCtrl
         $rootScope.languageTituloDetail = data.tituloDetail; // All tags used in TituloDetailCtrl
@@ -178,7 +162,7 @@ angular.module('construirTVControllers', [])
   $scope.getDestacados = function() {
     $http({
     method: 'GET',
-    url: $rootScope.serverURL + "/api/titulos/destacados"
+    url: $rootScope.serverURL + "/api/titulos/destacados/"
     })
     .success(function(data, status){
         $scope.slides = data;
@@ -285,52 +269,6 @@ angular.module('construirTVControllers', [])
 
 }])
 
-.controller('CortoDetailCtrl', ['$scope', '$routeParams', '$http', '$rootScope', '$modalInstance', '$location', 'cortoId', '$sce', function($scope, $routeParams, $http, $rootScope, $modalInstance, $location, cortoId, $sce) {
-
-  $scope.id = cortoId; // cortoId value is set in the function 'openCortoDetail' located in 'HomeCtrl'
-  
-  //$location.path("/home/" + $scope.id).replace(); // Change URL to HOME for deleting crotId parameter (if exists) 
-  
-  // ***** START API ***** Get corto detail
-  $scope.showPreloader = true; // Show preloader gif
-  $scope.cortoResult = true; // Set to true for showing label titles in pop up
-  $scope.sendToAPI = '{"id": "' + $scope.id + '" }';
-  $http({
-      method: 'POST',
-      url: $rootScope.serverURL + "/corto",
-      data: $scope.sendToAPI
-  })
-  .success(function(data, status){
-      $scope.cortoResult = data[0];
-      $scope.showPreloader = false; // Hide preloader gif
-      console.log(data, status);  //remove for production
-  })
-  .error(function(data, status){
-      $scope.cortoResult = false; // Set to false for showing error pop up
-      $scope.showPreloader = false; // Hide preloader gif
-      console.log(data, status); //remove for production
-  });
-  // ***** END API *****
-
-  // ***** START MODAL CLOSE FUNCTIONS *****
-  $scope.ok = function () {
-    $modalInstance.close();
-    $location.path("/home").replace(); // Change URL to HOME for deleting crotId parameter (if exists)
-  };
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
-  // ***** END MODAL CLOSE FUNCTIONS *****
-
-  // ***** START VIMEP VALIDATION URL *****
-  $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl("//player.vimeo.com/video/" + src);
-  }
-  // ***** END VIMEP VALIDATION URL *****
-
-}])
-
 .controller('TitulosCtrl', ['$scope', '$http', '$rootScope', '$location', function($scope, $http, $rootScope, $location) {
   // Set the value to variable for updating class active in header menu
   $rootScope.currentUrl = $location.path();
@@ -398,35 +336,53 @@ angular.module('construirTVControllers', [])
 
 }])
 
-.controller('RegistroCtrl', ['$scope', '$routeParams', '$http', '$rootScope', '$location', function($scope, $routeParams, $http, $rootScope, $location) {
+.controller('RegistroCtrl', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$sce', function($scope, $routeParams, $http, $rootScope, $location, $sce) {
 
   // Set the value to variable for updating class active in header menu
   // In this case harcode the URL for showing active PROYECTOS in menu
-  $rootScope.currentUrl = "/proyectos";
+  $rootScope.currentUrl = "/register";
   window.scrollTo(0,0);
 
-  $scope.id = $routeParams.proyectoId;
+  $scope.getFromFromAPI = function() {
+    $scope.showPreloader = true; // Show preloader gif
+    $http({
+        method: 'GET',
+        url: $rootScope.serverURL + "/register/",
+    })
+    .success(function(data, status){
+        $scope.formFromAPI = $scope.renderHtml(data);
+        console.log(data, status);  //remove for production
+    })
+    .error(function(data, status){
+        console.log(data, status); //remove for production
+    });
+  }
 
-  // ***** START API ***** Get proyecto detail
-  $scope.showPreloader = true; // Show preloader gif
-  $scope.proyectoResult = true; // Set to true for showing label titles
-  $scope.sendToAPI = '{"id": "' + $scope.id + '" }';
-  $http({
-      method: 'POST',
-      url: $rootScope.serverURL + "/industria/proyecto",
-      data: $scope.sendToAPI
-  })
-  .success(function(data, status){
-      $scope.proyectoResult = data[0];
-      $scope.showPreloader = false; // Hide preloader gif
-      console.log(data, status);  //remove for production
+  $scope.renderHtml = function(html_code) {
+      return $sce.trustAsHtml(html_code);
+  };
 
-  })
-  .error(function(data, status){
-      $scope.proyectoResult = false; // Set to false for showing error pop up
-      $scope.showPreloader = false; // Hide preloader gif
-      console.log(data, status); //remove for production
-  });
-  // ***** END API *****
+  $scope.getFromFromAPI();
+
+  // ***** REGISTER USER *****
+  $scope.registerNewUser = function(email, username, passFirst, passSecond, token) {
+    $scope.sendToAPI = '{"fos_user_registration_form[email]": "' + email + '", "fos_user_registration_form[username]": "' + username + '", "fos_user_registration_form[plainPassword][first]": "' + passFirst + '", "fos_user_registration_form[plainPassword][second]": "' + passSecond + '", "fos_user_registration_form[_token]": "' + token + '"}';
+    $http({
+        method: 'POST',
+        url: $rootScope.serverURL + "/register/",
+        data: $scope.sendToAPI,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    .success(function(data, status){
+        alert('yeah ' + data);
+        console.log(data, status);  //remove for production       
+    })
+    .error(function(data, status){
+        alert('nope ' + data);
+        console.log(data, status); //remove for production
+    });
+  }
+  $scope.registerNewUser("asd@asd.com", "jajaja", "asd", "asd", "123");
+  // ***** END REGISTER USER *****
 
 }])

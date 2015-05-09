@@ -17,6 +17,10 @@
       }
     ]
   },
+  "search":
+  {
+    "inputSearch" : "Buscar por género, serie o título"
+  },
   "home":
   {
     "resultsText" : "Resultados de",

@@ -72,8 +72,39 @@ class ApiController extends Controller
 
     public function obtenerTitulosAction()
     {
-        $serie_id = $this->get("request")->query->get('serie_id');
+        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findAll();
+        
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $jsonContent = $serializer->serialize($titulos, 'json');
+
+        $response = new Response($jsonContent);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    public function obtenerTitulosPorSerieAction($serie_id)
+    {
         $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('serie' => $serie_id));
+
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $jsonContent = $serializer->serialize($titulos, 'json');
+
+        $response = new Response($jsonContent);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
+    public function obtenerTitulosPorGeneroAction($genero_id)
+    {
+        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('genero' => $genero_id));
 
         $encoders = array(new JsonEncoder());
         $normalizers = array(new GetSetMethodNormalizer());
@@ -89,7 +120,7 @@ class ApiController extends Controller
 
     public function obtenerDetalleTituloAction($id)
     {
-        if (0)//false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) 
+        if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) 
         {
             throw new AccessDeniedException();
         }

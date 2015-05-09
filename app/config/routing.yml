@@ -2,7 +2,7 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
-blood_window_bw:
+admin:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   admin/
 
@@ -33,10 +33,20 @@ api_generos_all:
     defaults: { _controller: "AppBundle:Api:obtenerGeneros" }
     methods:  GET        
 
-api_titulos_serie:
+api_titulos_all:
     path: api/titulos
     defaults: { _controller: "AppBundle:Api:obtenerTitulos" }
     methods: GET
+
+api_titulos_serie:
+    path: api/titulos_serie/{serie_id}
+    defaults: { _controller: "AppBundle:Api:obtenerTitulosPorSerie" }
+    methods: GET
+
+api_titulos_serie:
+    path: api/titulos_genero/{genero_id}
+    defaults: { _controller: "AppBundle:Api:obtenerTitulosPorGenero" }
+    methods: GET    
 
 api_titulo_detalle:
     path: api/titulos/{id}
@@ -44,6 +54,6 @@ api_titulo_detalle:
     methods: GET
 
 api_titulos_destacados:
-    path: api/titulos/destacados
+    path: api/titulos/destacados/
     defaults: { _controller: "AppBundle:Api:obtenerTitulosDestacados" }
     methods: GET    

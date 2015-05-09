@@ -10,13 +10,13 @@
       <generator strategy="IDENTITY"/>
     </id>
     <field name="nombre" type="string" column="nombre" length="100" nullable="false"/>
-    <field name="nroCapitulo" type="integer" column="nro_capitulo" nullable="false"/>
-    <field name="duracion" type="integer" column="duracion" nullable="false"/>
-    <field name="temporada" type="integer" column="temporada" nullable="false"/>
-    <field name="subtitulado" type="boolean" column="subtitulado" nullable="false"/>
-    <field name="sinopsis" type="string" column="sinopsis" length="4000" nullable="false"/>
-    <field name="urlVimeo" type="string" column="url_vimeo" length="100" nullable="false"/>
-    <field name="destacado" type="boolean" column="destacado" nullable="false"/>
+    <field name="nroCapitulo" type="integer" column="nro_capitulo" nullable="fatruese"/>
+    <field name="duracion" type="integer" column="duracion" nullable="true"/>
+    <field name="temporada" type="integer" column="temporada" nullable="true"/>
+    <field name="subtitulado" type="boolean" column="subtitulado" nullable="true"/>
+    <field name="sinopsis" type="string" column="sinopsis" length="4000" nullable="true"/>
+    <field name="urlVimeo" type="string" column="url_vimeo" length="100" nullable="true"/>
+    <field name="destacado" type="boolean" column="destacado" nullable="true"/>
     <many-to-one field="genero" target-entity="Generos">
       <join-columns>
         <join-column name="genero_id" referenced-column-name="id"/>

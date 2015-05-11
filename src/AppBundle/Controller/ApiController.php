@@ -120,12 +120,12 @@ class ApiController extends Controller
 
     public function obtenerDetalleTituloAction($id)
     {
-        if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) 
+        /*if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) 
         {
             throw new AccessDeniedException();
         }
         else
-        {
+        {*/
             $titulo = $this->getDoctrine()->getRepository('AppBundle:Titulos')->find($id);
 
             $encoders = array(new JsonEncoder());
@@ -138,7 +138,7 @@ class ApiController extends Controller
             $response->headers->set('Content-Type', 'application/json');
 
             return $response;  
-        }
+        //}
     }
 
     public function obtenerTitulosDestacadosAction()

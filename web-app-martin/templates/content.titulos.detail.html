@@ -1,148 +1,94 @@
-<!--CONTENIDO DETALLE WORK IN PROGRESS -->
+<!--CONTENIDO DETALLE TITULO -->
 <article class="cont-detalles">
-	<!-- Show for Spanish -->
-	<h1 class="pull-left" ng-show="language == 'esp' && !showPreloader">{{proyectoResult.tituloEspaniol}}</h1>
-	<!-- Show for English -->
-	<h1 class="pull-left" ng-show="language == 'eng' && !showPreloader">{{proyectoResult.tituloIngles}}</h1>
-	<!-- Preloader -->
-	<h1 class="pull-left" ng-show="showPreloader">
-	    <img ng-src="/web/bundles/bloodwindowbw/theme/images/loader-red.GIF" width="24px" height="24px">
-	</h1>
-	<!-- /Preloader -->
+	<h1 class="">{{tituloResult.nombre}}</h1>
 	<div class="clearfix"></div>
 	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs"></div>
-	<div class="cont-detalle-work col-lg-8 col-md-8 col-sm-12 col-xs-12">
-		<div ng-show="proyectoResult" class="work-info col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<!-- Show for Spanish -->
-    			<p ng-show="language == 'esp' && proyectoResult.tituloEspaniol">
-					<b>{{languageProyectoDetail.projectTitle}}: </b> <br />
-					{{proyectoResult.tituloEspaniol}}
-				</p>
-				<!-- Show for English -->
-    			<p ng-show="language == 'eng' && proyectoResult.tituloEspaniol">
-					<b>{{languageProyectoDetail.projectTitle}}: </b> <br />
-					{{proyectoResult.tituloIngles}}
-				</p>
-				<p ng-show="proyectoResult.pais">
-					<b>{{languageProyectoDetail.countryMajorityProducer}}: </b> <br />
-					{{proyectoResult.pais}}
-				</p>
-				<p ng-show="proyectoResult.anio">
-					<b>{{languageProyectoDetail.year}}: </b> <br />
-					{{proyectoResult.anio}}
-				</p>
-				<p ng-show="proyectoResult.duracion">
-					<b>{{languageProyectoDetail.duration}}: </b> <br />
-					{{proyectoResult.duracion}} min
-				</p>
-				<!-- Show for Spanish -->
-    			<p ng-show="language == 'esp' && proyectoResult.sinopsisEspaniol">
-					<b>{{languageProyectoDetail.synopsis}}: </b> <br />
-					{{proyectoResult.sinopsisEspaniol}}
-				</p>
-				<!-- Show for English -->
-    			<p ng-show="language == 'eng' && proyectoResult.sinopsisIngles">
-					<b>{{languageProyectoDetail.synopsis}}: </b> <br />
-					{{proyectoResult.sinopsisIngles}}
-				</p>
-				<p ng-show="proyectoResult.presupuesto">
-					<b>{{languageProyectoDetail.budget}}: </b> <br />
-					{{proyectoResult.presupuesto}} - USD 
-				</p>
-				<p ng-show="proyectoResult.presupuestoAdquirido">
-					<b>{{languageProyectoDetail.budgetAcquired}}: </b> <br />
-					{{proyectoResult.presupuestoAdquirido}} %
-				</p>
-				<!-- Show for Spanish -->
-    			<p ng-show="language == 'esp' && proyectoResult.financiacionEspaniol">
-					<b>{{languageProyectoDetail.financing}}: </b> <br />
-					{{proyectoResult.financiacionEspaniol}}
-				</p>
-				<!-- Show for English -->
-    			<p ng-show="language == 'eng' && proyectoResult.financiacionIngles">
-					<b>{{languageProyectoDetail.financing}}: </b> <br />
-					{{proyectoResult.financiacionIngles}}
-				</p>
-				<p ng-show="proyectoResult.compania">
-					<b>{{languageProyectoDetail.company}}: </b> <br />{{proyectoResult.compania}}
-				</p>
-				<p ng-show="proyectoResult.email">
-					<b>{{languageProyectoDetail.mail}}: </b> <br />					
-					<a href="mailto:{{proyectoResult.email}}?Subject=Hello%20from%20BloodWindow%20App" target="_top" class="whiteLink">{{proyectoResult.email}}</a> 
-				</p>
-				<p ng-show="proyectoResult.telefono">
-					<b>{{languageProyectoDetail.phone}}: </b> <br />
-					<a href="callto:{{proyectoResult.telefono}}" class="whiteLink">{{proyectoResult.telefono}}</a>
-				</p>
-				<p ng-show="proyectoResult.website">
-					<b>{{languageProyectoDetail.website}}: </b> <br />				
-					<a href="http://{{proyectoResult.website}}" target="_blank" class="whiteLink">{{proyectoResult.website}}</a>
-				</p>
-			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<div class="work-video col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<img ng-src="{{imagesSrc}}/proyecto/{{id}}.jpg" class="img-responsive" alt="" />
-				</div>
-				<!-- Show for Spanish -->
-    			<p ng-show="language == 'esp' && proyectoResult.objetivoEspaniol">
-					<b>{{languageProyectoDetail.objective}}: </b> <br />
-					{{proyectoResult.objetivoEspaniol}}
-				</p>
-				<!-- Show for English -->
-    			<p ng-show="language == 'eng' && proyectoResult.objetivoIngles">
-					<b>{{languageProyectoDetail.objective}}: </b> <br />
-					{{proyectoResult.objetivoIngles}}
-				</p>
-				<!-- Show for Spanish -->
-    			<p ng-show="language == 'esp' && proyectoResult.estadoEspaniol">
-					<b>{{languageProyectoDetail.projectStatus}}: </b> <br />
-					{{proyectoResult.estadoEspaniol}}
-				</p>
-				<!-- Show for English -->
-    			<p ng-show="language == 'eng' && proyectoResult.estadoIngles">
-					<b>{{languageProyectoDetail.projectStatus}}: </b> <br />
-					{{proyectoResult.estadoIngles}}
-				</p>
-				<!-- Show for Spanish -->
-				<p ng-show="language == 'esp' && proyectoResult.visionEspaniol">
-					<b>{{languageProyectoDetail.directorsVision}}: </b> <br />	{{proyectoResult.visionEspaniol}}
-				</p>
-				<!-- Show for English -->
-				<p ng-show="language == 'eng' && proyectoResult.visionIngles">
-					<b>{{languageProyectoDetail.directorsVision}}: </b> <br />	{{proyectoResult.visionIngles}}
-				</p>
-				<p ng-show="proyectoResult.director">
-					<b>{{languageProyectoDetail.directorsName}}: </b> <br />	{{proyectoResult.director}}
-				</p>
-				<!-- Show for Spanish -->
-				<p ng-show="language == 'esp' && proyectoResult.cvDirEspaniol">
-					<b>{{languageProyectoDetail.directorsCV}}: </b> <br />	{{proyectoResult.cvDirEspaniol}}
-				</p>
-				<!-- Show for English -->
-				<p ng-show="language == 'eng' && proyectoResult.cvDirIngles">
-					<b>{{languageProyectoDetail.directorsCV}}: </b> <br />	{{proyectoResult.cvDirIngles}}
-				</p>
-				<p ng-show="proyectoResult.productor">
-					<b>{{languageProyectoDetail.producersName}}: </b> <br />{{proyectoResult.productor}}
-				</p>
-				<!-- Show for Spanish -->
-				<p ng-show="language == 'esp' && proyectoResult.cvProdEspaniol">
-					<b>{{languageProyectoDetail.producersCV}}: </b> <br />{{proyectoResult.cvProdEspaniol}}
-				</p>
-				<!-- Show for English -->
-				<p ng-show="language == 'eng' && proyectoResult.cvProdIngles">
-					<b>{{languageProyectoDetail.producersCV}}: </b> <br />{{proyectoResult.cvProdIngles}}
-				</p>
-			</div>
-			<div class="clearfix"></div>
+	<div class="cont-detalle-proyecto col-lg-8 col-md-8 col-sm-12 col-xs-12">
+		<div class="proyecto-video col-lg-12 col-md-12 col-sm-12 col-xs-12 embed-container">
+			<!-- <img src="{{imagesSrc}}/titulos/{{tituloResult.id}}.jpg" class="img-responsive" alt="" /> -->
+
+	        <!-- Preloader -->
+	        <div class="preloader" ng-hide="videoReady">
+	        	<br />
+	            <img ng-src="theme/images/preloader.GIF" width="24px" height="24px">
+	            <br />
+	            <br />
+	        </div>
+	        <!-- /Preloader -->
+
+			<iframe ng-show="videoReady" ng-src="{{trustSrc(tituloResult.urlVimeo)}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen class="img-responsive"></iframe>
 		</div>
-		<!-- Show when error when connecting to server or when corto not found in DB -->
-		<div ng-hide="proyectoResult" class="oppsError col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<p><b>Oops!</b> {{languageProyectoDetail.error}}</p>
+		<div class="clearfix"></div>
+		<div class="proyecto-info col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<p ng-show="tituloResult.serie.nombre">
+					<b>Título de la serie: </b> <br />
+					{{tituloResult.serie.nombre}}
+				</p>
+				<p ng-show="tituloResult.nombre">
+					<b>Titulo del capitulo: </b> <br />
+					{{tituloResult.nombre}}
+				</p>
+				<p ng-show="tituloResult.duracion">
+					<b>Duración (capitulo):  </b> <br />
+					{{tituloResult.duracion}}' min
+				</p>
+				<p ng-show="tituloResult.subtitulado">
+					<b>Subtitulado: </b> <br />
+					Si
+				</p>
+				<p ng-show="tituloResult.subtitulado == false">
+					<b>Subtitulado: </b> <br />
+					No
+				</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<p ng-show="tituloResult.genero.nombre">
+					<b>Genero:</b> <br />
+					{{tituloResult.genero.nombre}} 
+				</p>
+				<p ng-show="tituloResult.nroCapitulo">
+					<b>N° del Capitulo: </b> <br />
+					{{tituloResult.nroCapitulo}}
+				</p>
+				<p ng-show="tituloResult.temporada">
+					<b>Temporada: </b> <br />
+					{{tituloResult.temporada}}
+				<p ng-show="tituloResult.sinopsis">
+					<b>Sinopsis: </b> <br />					
+					{{tituloResult.sinopsis}}
+				</p>
+			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
 	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs"></div>
 	<div class="clearfix"></div>
 </article>
+
+<aside class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-relacionados">
+	<h2 class="">Titulos Rerlacionados</h2>
+		<div class="well-none">
+
+            <carousel class="carousel slide">
+                <!-- Carousel items -->
+                <slide  ng-repeat="t in relatedTitles"> <!-- Create a slide every 6 genders -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 item-programa" ng-repeat="relatedTitle in relatedTitles[$index]">
+                        	<a href="#titles/{{relatedTitle.id}}" class="thumbnail" >
+                        		<div class="item-hover">
+                        			<span>{{relatedTitle.nombre}}</span>
+                        		</div>
+                        		<img src="{{imagesSrc}}/titulos/{{relatedTitle.id}}.jpg" alt="Image" class="img-responsive">
+                        	</a>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </slide>
+                <!--/item-->
+            </carousel>
+            <!--/myCarousel-->
+
+        </div>
+        <!--/well-->
+</aside>

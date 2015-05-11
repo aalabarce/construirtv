@@ -501,6 +501,10 @@ article.slide{
 	max-height: 560px;
 	overflow: hidden;
 }
+article.slide a,a:hover {
+	text-decoration:none;
+	color:#000;
+}
 article.slide .carousel .item {
     width: 100%; /*slider width*/
     max-height: 560px; /*slider height*/
@@ -962,10 +966,10 @@ section.main-cont aside.cont-relacionados .carousel-control:hover{
 	color: #000;
 }
 section.main-cont aside.cont-relacionados .carousel-control.left{
-	left: -7%;
+	left: -5%;
 }
 section.main-cont aside.cont-relacionados .carousel-control.right{
-	right: -7%;
+	right: -2%;
 }
 
 
@@ -1173,7 +1177,7 @@ section.main-cont section.programas .carousel-control {
   text-align: center;
   text-shadow: none;
   z-index: 100;
-  display: none;
+  /* display: none; */
 }
 section.main-cont section.programas .carousel-control:hover{
 	color: #8fd4d9;
@@ -1184,11 +1188,11 @@ section.main-cont section.programas .carousel-control i{
 }
 section.main-cont section.programas .carousel-control.left {
 	background-image: none;
-	left: -2.3em;
+	left: -1.6em;
 }
 section.main-cont section.programas .carousel-control.right {
   left: auto;
-  right: -2.3em;
+  right: -0.5em;
   background-image: none;
 }
 /********************** MAIN PROGRAMAS ***************************/

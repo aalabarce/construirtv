@@ -4,7 +4,7 @@
 
 //angular.module('bloodWindow', ['ui.router', 'bloodWindowAnimations', 'bloodWindowControllers', 'bloodWindowServices' ])
 
-angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVControllers' ])
+angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVControllers', 'smoothScroll' ])
 
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
       $routeProvider.
@@ -12,6 +12,7 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
           templateUrl: 'templates/content.home.html',
           controller: 'HomeCtrl'
         }).
+        /*
         when('/titles', {
           templateUrl: 'templates/content.titulos.html',
           controller: 'TitulosCtrl',
@@ -21,6 +22,7 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
             }]
           }
         }).
+        */
         when('/titles/:tituloId', {
           templateUrl: 'templates/content.titulos.detail.html',
           controller: 'TitulosDetailCtrl',

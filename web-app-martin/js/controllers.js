@@ -294,70 +294,67 @@ angular.module('construirTVControllers', [])
 
 }])
 
-.controller('TitulosCtrl', ['$scope', '$http', '$rootScope', '$location', function($scope, $http, $rootScope, $location) {
+.controller('TitulosDetailCtrl', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$sce', '$timeout', function($scope, $routeParams, $http, $rootScope, $location, $sce, $timeout) {
+
   // Set the value to variable for updating class active in header menu
-  $rootScope.currentUrl = $location.path();
+  // In this case harcode the URL for showing active PROYECTOS in menu
+  $rootScope.currentUrl = "/titles";
   window.scrollTo(0,0);
 
-  // ***** START API ***** Get All Proyectos with filters
-  $scope.orderBy = "anio"; // Edit stored parameters
-  $scope.orderBy = "financiacion"; // Edit stored parameters
+  $scope.id = $routeParams.tituloId;
 
-  $scope.getAllProyectos = function() {
-    $scope.sendToAPI = '{"orderBy": "' + $scope.orderBy + '"}';
+  // ***** START API ***** Get proyecto detail
+  $scope.showPreloader = true; // Show preloader gif
+  $scope.tituloResult = true; // Set to true for showing label titles
+  $http({
+      method: 'GET',
+      url: $rootScope.serverURL + "/api/titulos/" + $scope.id
+  })
+  .success(function(data, status){
+      $scope.tituloResult = data;
+      $scope.showPreloader = false; // Hide preloader gif
+      $scope.getRelatedTitles($scope.tituloResult.serie.id); // Get related titles
+      console.log(data, status);  //remove for production
+
+  })
+  .error(function(data, status){
+      $scope.tituloResult = false; // Set to false for showing error pop up
+      $scope.showPreloader = false; // Hide preloader gif
+      console.log(data, status); //remove for production
+  });
+  // ***** END API *****
+
+  // ***** START API ***** Get related titles based on this series
+  $scope.getRelatedTitles = function(id) {
     $http({
-        method: 'POST',
-        url: $rootScope.serverURL + "/industria/proyectos",
-        data: $scope.sendToAPI
+        method: 'GET',
+        url: $rootScope.serverURL + "/api/titulos_serie/" + id
     })
     .success(function(data, status){
 
-        console.log(data, status);  //remove for production
-        
         // Split the results in arrays of 4 elements
-        $scope.proyectos = [];
+        $scope.relatedTitles = [];
         while (data.length > 0)
-        $scope.proyectos.push(data.splice(0, 4));
-        
+        $scope.relatedTitles.push(data.splice(0, 4));
+
+        console.log(data, status);  //remove for production
     })
     .error(function(data, status){
         console.log(data, status); //remove for production
     });
   }
   // ***** END API *****
-  $scope.getAllProyectos();
-}])
 
-.controller('TitulosDetailCtrl', ['$scope', '$routeParams', '$http', '$rootScope', '$location', function($scope, $routeParams, $http, $rootScope, $location) {
+  // ***** START VIMEP VALIDATION URL *****
+  $scope.videoReady = false;
+  $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl("//player.vimeo.com/video/" + src);
+  }
 
-  // Set the value to variable for updating class active in header menu
-  // In this case harcode the URL for showing active PROYECTOS in menu
-  $rootScope.currentUrl = "/proyectos";
-  window.scrollTo(0,0);
-
-  $scope.id = $routeParams.proyectoId;
-
-  // ***** START API ***** Get proyecto detail
-  $scope.showPreloader = true; // Show preloader gif
-  $scope.proyectoResult = true; // Set to true for showing label titles
-  $scope.sendToAPI = '{"id": "' + $scope.id + '" }';
-  $http({
-      method: 'POST',
-      url: $rootScope.serverURL + "/industria/proyecto",
-      data: $scope.sendToAPI
-  })
-  .success(function(data, status){
-      $scope.proyectoResult = data[0];
-      $scope.showPreloader = false; // Hide preloader gif
-      console.log(data, status);  //remove for production
-
-  })
-  .error(function(data, status){
-      $scope.proyectoResult = false; // Set to false for showing error pop up
-      $scope.showPreloader = false; // Hide preloader gif
-      console.log(data, status); //remove for production
-  });
-  // ***** END API *****
+  $timeout(function(){ // Set a delay for avoid showing "wrong video url"
+    $scope.videoReady = true;
+  }, 2000)
+  // ***** END VIMEP VALIDATION URL *****
 
 }])
 

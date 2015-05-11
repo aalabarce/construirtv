@@ -8,23 +8,25 @@
 	        </div>
 	        <!-- /Preloader -->
 		  	<slide ng-repeat="slide in slides" active="slide.active" ng-click="openCortoDetail(slide.id)" class="pointerCursor">
-            	<div class="desc-item col-lg-12 col-md-12 hidden-sm hidden-xs" style="text-align: left;">
-            		<h1>{{slide.nombre}}</h1>
-            		<div class="info-item">
-            			<div class="main-detail-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
-	            			<!--<h2>Historia Universal Construccion</h2>-->
-	            			<p>{{slide.sinopsis}}
-							</p>
-            			</div>
-						<div class="detail-info-item col-lg-3 col-md-3 col-sm-3 col-xs-3">
-							<p class="titulo-serie">Titulo de la serie: <b>{{slide.serie.nombre}}</b> </p>
-							<p class="genero">Genero: <b>{{slide.genero.nombre}}</b></p>
-							<p class="duracion">Duracion: <b>{{slide.duracion}}</b></p>
-						</div>
-            		</div>
-            	</div>
+		  		<a href="#titles/{{slide.id}}">
+	            	<div class="desc-item col-lg-12 col-md-12 hidden-sm hidden-xs" style="text-align: left;">
+	            		<h1>{{slide.nombre}}</h1>
+	            		<div class="info-item">
+	            			<div class="main-detail-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
+		            			<!--<h2>Historia Universal Construccion</h2>-->
+		            			<p>{{slide.sinopsis}}
+								</p>
+	            			</div>
+							<div class="detail-info-item col-lg-3 col-md-3 col-sm-3 col-xs-3">
+								<p class="titulo-serie">Titulo de la serie: <b>{{slide.serie.nombre}}</b> </p>
+								<p class="genero">Genero: <b>{{slide.genero.nombre}}</b></p>
+								<p class="duracion">Duracion: <b>{{slide.duracion}}</b></p>
+							</div>
+	            		</div>
+	            	</div>
 
-                <img ng-src="{{imagesSrc}}/carousel/{{slide.id}}.jpg" alt="Slide{{slide.id}}" />
+                	<img ng-src="{{imagesSrc}}/carousel/{{slide.id}}.jpg" alt="Slide{{slide.id}}" />
+            	</a>
 		  	</slide>
 		</carousel>
 		<!-- Show when user is searching for something -->
@@ -44,7 +46,7 @@
                 <slide  ng-repeat="t in generos"> <!-- Create a slide every 6 genders -->
                     <div class="row">
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa" ng-repeat="genero in generos[$index]" ng-class="{active: '{{gender.id}}' == searchFestival}" ng-click="setCurrentGender(genero.id, genero.nombre)">
-                        	<a href="javascript:void(0)" class="thumbnail">
+                        	<a href="javascript:void(0)" class="thumbnail" scroll-to="titlesResults" offset="83">
                         		<div class="item-hover">
                         			<span>+</span>
                         		</div>
@@ -64,7 +66,7 @@
 	</div>
 </section>
 
-<section class="cat-movies">
+<section class="cat-movies" id="titlesResults">
 	<h3>{{searchGenderName}}</h3>
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-cortos-des">
 		<!--

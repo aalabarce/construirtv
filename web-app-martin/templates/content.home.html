@@ -39,128 +39,49 @@
 	<div class="cont-proyectos-des col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="well-none">
 
-			<carousel interval="myInterval" class="carousel slide fade-in">
-		        <!-- Preloader -->
-		        <div class="preloader" ng-hide="slides">
-		            <img ng-src="/web/bundles/bloodwindowbw/theme/images/loader.GIF" width="24px" height="24px">
-		        </div>
-		        <!-- /Preloader -->
-			  	<slide ng-repeat="slide in slides" active="slide.active" ng-click="openCortoDetail(slide.id)" class="pointerCursor">
-	            	<div class="desc-item col-lg-12 col-md-12 hidden-sm hidden-xs" style="text-align: left;">
-	            		<h1>{{slide.nombre}}</h1>
-	            		<div class="info-item">
-	            			<div class="main-detail-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
-		            			<!--<h2>Historia Universal Construccion</h2>-->
-		            			<p>{{slide.sinopsis}}
-								</p>
-	            			</div>
-							<div class="detail-info-item col-lg-3 col-md-3 col-sm-3 col-xs-3">
-								<p class="titulo-serie">Titulo de la serie: <b>{{slide.serie.nombre}}</b> </p>
-								<p class="genero">Genero: <b>{{slide.genero.nombre}}</b></p>
-								<p class="duracion">Duracion: <b>{{slide.duracion}}</b></p>
-							</div>
-	            		</div>
-	            	</div>
-
-	                <img ng-src="{{imagesSrc}}/carousel/{{slide.id}}.jpg" alt="Slide{{slide.id}}" />
-			  	</slide>
-			</carousel>
-
-            <div id="carousel-proyectos" class="carousel slide">
+            <carousel class="carousel slide">
                 <!-- Carousel items -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="row">
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa">
-                            	<a href="#" class="thumbnail">
-                            		<div class="item-hover">
-                            			<span>+</span>
-                            		</div>
-                            		<img src="images/img-proyectos-01.jpg" alt="Image" class="img-responsive">
-                            	</a>
-                            	<h3 class="text-center">Social</h3>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa">
-                            	<a href="#" class="thumbnail">
-                            	<div class="item-hover">
-                            			<span>+</span>
-                            		</div>
-                            		<img src="images/img-proyectos-02.jpg" alt="Image" class="img-responsive">
-                            	</a>
-                            	<h3 class="text-center">Educativo</h3>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa">
-                            	<a href="#" class="thumbnail">
-                            	<div class="item-hover">
-                            			<span>+</span>
-                            		</div>
-                            		<img src="images/img-proyectos-03.jpg" alt="Image" class="img-responsive">
-                            	</a>
-                            	<h3 class="text-center">Gente</h3>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa">
-                            	<a href="#" class="thumbnail">
-                            	<div class="item-hover">
-                            			<span>+</span>
-                            		</div>
-                            		<img src="images/img-proyectos-04.jpg" alt="Image" class="img-responsive">
-                            	</a>
-                            	<h3 class="text-center">Industria</h3>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa">
-                            	<a href="#" class="thumbnail">
-                            	<div class="item-hover">
-                            			<span>+</span>
-                            		</div>
-                            		<img src="images/img-proyectos-01.jpg" alt="Image" class="img-responsive">
-                            	</a>
-                            	<h3 class="text-center">Ecologia</h3>
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa">
-                            	<a href="#" class="thumbnail">
-                            	<div class="item-hover">
-                            			<span>+</span>
-                            		</div>
-                            		<img src="images/img-proyectos-02.jpg" alt="Image" class="img-responsive">
-                            	</a>
-                            	<h3 class="text-center">Ccine</h3>
-                            </div>
+                <slide  ng-repeat="t in generos"> <!-- Create a slide every 6 genders -->
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa" ng-repeat="genero in generos[$index]" ng-class="{active: '{{gender.id}}' == searchFestival}" ng-click="setCurrentGender(genero.id, genero.nombre)">
+                        	<a href="javascript:void(0)" class="thumbnail">
+                        		<div class="item-hover">
+                        			<span>+</span>
+                        		</div>
+                        		<img src="{{imagesSrc}}/generos/{{genero.id}}.jpg" alt="Image" class="img-responsive">
+                        	</a>
+                        	<h3 class="text-center">{{genero.nombre}}</h3>
                         </div>
-                        <!--/row-->
                     </div>
-                    <!--/item-->    
-                </div>
-                <!--/carousel-inner--> 
-                <a class="left carousel-control" href="#carousel-proyectos" data-slide="prev"><i class="fa icon-left-open text-center pull-left"></i></a>
-
-                <a class="right carousel-control" href="#carousel-proyectos" data-slide="next"><i class="fa icon-right-open text-center pull-right"></i></a>
-            </div>
+                    <!--/row-->
+                </slide>
+                <!--/item-->
+            </carousel>
             <!--/myCarousel-->
+
         </div>
         <!--/well-->
-		
-		
 	</div>
 </section>
 
 <section class="cat-movies">
-	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-		<ul class="nav nav-tabs listado-tabs" role="tablist" style="cursor: pointer;">
-			<li ng-class="{active: 'all' == searchFestival}" ng-click="setCurrentGender('all')">
-				<a ng-show="language == 'eng'">All genders</a>
-				<a ng-show="language == 'esp'">Todos</a>
+	<h3>{{searchGenderName}}</h3>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-cortos-des">
+		<!--
+		<ul class="nav nav-tabs listado-tabs" role="tablist">
+			<li class="active">
+				<a>{{searchGenderName}}</a>
 			</li>
-			<li ng-repeat="gender in genders" ng-class="{active: '{{gender.id}}' == searchFestival}" ng-click="setCurrentGender(gender.id)"><a>{{gender.nombre}}</a></li>
 		</ul>
-		<div class="tab-content">
-	      <div class="tab-pane fade active in">
+		-->
+		<div class="tab-content" id="myTabContent">
+	      <div id="sitges">
 	        <div class="item-listado-tab">
-	        	<h1 ng-show="filterTitles.length == 0">{{languageHome.noResultsText}}</h1>
+	        	<h1 ng-show="filterTitles.length == 0" class="notFoundMsg">{{languageHome.noResultsText}}</h1>
 		        <!-- Preloader -->
 		        <div class="preloader" ng-show="showPreloader">
 		        	<br />
-		            <img ng-src="/web/bundles/bloodwindowbw/theme/images/loader.GIF" width="24px" height="24px">
+		            <img ng-src="theme/images/preloader.GIF" width="24px" height="24px">
 		            <br />
 		            <br />
 		        </div>
@@ -173,8 +94,7 @@
 	        				<p ng-show="title.serie">{{languageHome.series}}: <span>{{title.serie.nombre}}</span></p>
 	        				<p ng-show="title.duracion">{{languageHome.duration}}: <span>{{title.duracion}}</span></p>
 	        			</div>
-	        			<!-- <img ng-src="{{imagesSrc}}/{{corto.id}}.jpg" class="img-responsive"> -->
-	        			<img ng-src="http://construirtv.com/images/elCanal-1.png" class="img-responsive">
+	        			<img ng-src="{{imagesSrc}}/titulos/{{title.id}}.jpg" class="img-responsive">
 	        		</a>
 	        	</div>
 	        </div>

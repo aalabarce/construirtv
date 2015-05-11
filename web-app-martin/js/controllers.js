@@ -199,14 +199,18 @@ angular.module('construirTVControllers', [])
   // ***** END API *****
 
   // ***** START API ***** Get all Genders for filter
-  $scope.genders = "";
   $scope.getAllGenders = function() {
     $http({
         method: 'GET',
         url: $rootScope.serverURL + "/api/generos"
     })
     .success(function(data, status){
-        $scope.genders = data;
+
+        // Split the results in arrays of 4 elements
+        $scope.generos = [];
+        while (data.length > 0)
+        $scope.generos.push(data.splice(0, 6));
+
         console.log(data, status);  //remove for production
     })
     .error(function(data, status){
@@ -221,7 +225,7 @@ angular.module('construirTVControllers', [])
     $scope.showPreloader = true; // Show preloader gif
     $http({
         method: 'GET',
-        url: $rootScope.serverURL + "/api/titulos_genero/" + genderID // CHECK THIS
+        url: $rootScope.serverURL + "/api/titulos_serie/" + genderID // CHECK THIS
     })
     .success(function(data, status){
         $scope.filterTitles = data;
@@ -260,11 +264,13 @@ angular.module('construirTVControllers', [])
   $scope.searchGender = "";
   $scope.searchBuscador = "";
   $scope.getAllGenders();
-  $scope.setCurrentGender = function(value) {
-    $scope.searchGender = value;
-    $scope.getTitlesFromGender(value);
+
+  $scope.setCurrentGender = function(id, name) {
+    $scope.searchGenderName = name;
+    $scope.searchGender = id;
+    $scope.getTitlesFromGender(id);
   }
-  $scope.setCurrentGender('all'); // Get all titles from all genders
+  $scope.setCurrentGender('all', 'Todos'); // Get all titles from all genders
   // ***** END RESULT TABS *****
 
 }])

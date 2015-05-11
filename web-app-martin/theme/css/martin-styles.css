@@ -19,6 +19,10 @@
 	cursor: pointer;
 }
 
+.notFoundMsg{
+	text-align: center;
+}
+
 /***** VIEMO EMBED *****/
 
 .embed-container { 
@@ -43,6 +47,8 @@
     margin-right: auto;
 }
 .preloader img{
+	margin-left: 48%;
+    margin-right: auto;
 	height: 24px;
 	width: 24px;
 }

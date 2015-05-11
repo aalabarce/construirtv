@@ -222,21 +222,40 @@ angular.module('construirTVControllers', [])
   // ***** START API ***** Get all titles from gender ///// If filterTitles empty show error in html, if not empty show results
   $scope.filterTitles = true; // Set var to true for not showing error message
   $scope.getTitlesFromGender = function(genderID) {
+
     $scope.showPreloader = true; // Show preloader gif
-    $http({
-        method: 'GET',
-        url: $rootScope.serverURL + "/api/titulos_serie/" + genderID // CHECK THIS
-    })
-    .success(function(data, status){
-        $scope.filterTitles = data;
-        $scope.showPreloader = false; // Hide preloader gif
-        console.log(data, status);  //remove for production
-    })
-    .error(function(data, status){
-        $scope.filterTitles = ""; // Set var to lenght cero for showing error message
-        $scope.showPreloader = false; // Hide preloader gif
-        console.log(data, status); //remove for production
-    });
+
+    if(genderID == 'all') { // Used when I want the titles from ALL genders
+        $http({
+          method: 'GET',
+          url: $rootScope.serverURL + "/api/titulos"
+        })
+        .success(function(data, status){
+            $scope.filterTitles = data;
+            $scope.showPreloader = false; // Hide preloader gif
+            console.log(data, status);  //remove for production
+        })
+        .error(function(data, status){
+            $scope.filterTitles = ""; // Set var to lenght cero for showing error message
+            $scope.showPreloader = false; // Hide preloader gif
+            console.log(data, status); //remove for production
+        });
+    } else { // Used when I want the titles from ONE gender
+        $http({
+          method: 'GET',
+          url: $rootScope.serverURL + "/api/titulos_serie/" + genderID // CHECK THIS
+        })
+        .success(function(data, status){
+            $scope.filterTitles = data;
+            $scope.showPreloader = false; // Hide preloader gif
+            console.log(data, status);  //remove for production
+        })
+        .error(function(data, status){
+            $scope.filterTitles = ""; // Set var to lenght cero for showing error message
+            $scope.showPreloader = false; // Hide preloader gif
+            console.log(data, status); //remove for production
+        });
+    }
   }
   // ***** END API *****
 

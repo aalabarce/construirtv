@@ -221,7 +221,7 @@ angular.module('construirTVControllers', [])
     $scope.showPreloader = true; // Show preloader gif
     $http({
         method: 'GET',
-        url: $rootScope.serverURL + "/api/titulos?serie_id=" + genderID // CHECK THIS
+        url: $rootScope.serverURL + "/api/titulos_genero/" + genderID // CHECK THIS
     })
     .success(function(data, status){
         $scope.filterTitles = data;

@@ -124,6 +124,7 @@ angular.module('construirTVControllers', [])
 
 
   // ***** LOGIN USER *****
+  $scope.errorLogin = false; // Hide error msg
   $scope.userLogin = function(email, password) {
       // ***** START API ***** Get token
       $http({
@@ -143,7 +144,8 @@ angular.module('construirTVControllers', [])
             console.log(data, status);  //remove for production
         })
         .error(function(data, status){
-            $scope.showErrors = data.error_description;
+            //$scope.showErrors = data.error_description;
+            $scope.errorLogin = true; // Show error msg
             console.log(data, status); //remove for production
       });
       // ***** END API *****

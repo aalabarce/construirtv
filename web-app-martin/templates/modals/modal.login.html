@@ -7,6 +7,11 @@
     </div>
     <div class="modal-body">
         <div class="row">
+          <div class="alert alert-danger" role="alert" ng-show="errorLogin">
+            Invalid username and password combination
+          </div>
+        </div>
+        <div class="row">
           <form class="registro" ng-submit="userLogin(userEmail, userPass);">
             <div class="form-group">
               <label for="exampleInputUser">Email</label>

@@ -80,14 +80,21 @@
     <!-- header -->
     <header class="navbar navbar-default navbar-fixed-top headerMain" ng-controller="HeaderCtrl">
       <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8 logoHeader">
-        <a class="navbar-brand" href="#">
-          <img class="img-responsive" src="theme/images/logo.png" alt="" />
-        </a>
-      </div>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-4 menuHeader">
-        <p class="logueado pull-right"><span>{{userName}}</span><a href="javascript:void(0)" ng-click="userLogout()" class="pull-right">cerrar</a></p>
-            </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8 logoHeader">
+          <a class="navbar-brand" href="#">
+            <img class="img-responsive" src="theme/images/logo.png" alt="" />
+          </a>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-4 menuHeader">
+          <p class="logueado pull-right" ng-show="userName"> <!-- Show when user is logged in -->
+            <span>{{userName}}</span>
+            <a href="javascript:void(0)" ng-click="userLogout()" class="pull-right">cerrar</a>
+          </p>
+          <p ng-hide="userName"> <!-- Show when user is not logged in -->
+            <a data-toggle="modal" class="pointer-login" ng-click="openLogin()">Iniciar sesion</a>
+            <a href="#register" class="btn-reg">Registrarse</a>
+          </p>
+        </div>
       </div>
     </header>
 

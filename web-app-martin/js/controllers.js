@@ -112,6 +112,7 @@ angular.module('construirTVControllers', [])
 
   // ***** START MODAL CLOSE FUNCTIONS *****
   $scope.ok = function () {
+    //If location "/" don't reload
     $location.path("/").replace(); // If user quits login, redirect to home
     $modalInstance.close(); // Close modal after redirecting
   };
@@ -148,6 +149,13 @@ angular.module('construirTVControllers', [])
       // ***** END API *****
   }
   // ***** END LOGIN USER *****
+  
+  // ***** REDIRECT USER TO REGISTRATION *****
+  $scope.userGoToRegister = function() {
+    $location.path("/register").replace(); // If user quits login, redirect to home
+    $modalInstance.close(); // Close modal after redirecting
+  }
+  // ***** END REDIRECT USER TO REGISTRATION *****
 
 }])
 

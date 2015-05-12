@@ -411,24 +411,25 @@ angular.module('construirTVControllers', [])
   $scope.getFromFromAPI();
 
   // ***** REGISTER USER *****
-  $scope.registerNewUser = function(email, username, passFirst, passSecond, token) {
-    $scope.sendToAPI = '{"fos_user_registration_form[email]": "' + email + '", "fos_user_registration_form[username]": "' + username + '", "fos_user_registration_form[plainPassword][first]": "' + passFirst + '", "fos_user_registration_form[plainPassword][second]": "' + passSecond + '", "fos_user_registration_form[_token]": "' + token + '"}';
-    $http({
-        method: 'POST',
-        url: $rootScope.serverURL + "/register/",
-        data: $scope.sendToAPI,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    })
-    .success(function(data, status){
-        alert('yeah ' + data);
-        console.log(data, status);  //remove for production       
-    })
-    .error(function(data, status){
-        alert('nope ' + data);
-        console.log(data, status); //remove for production
-    });
+  $scope.registerNewUser = function() {
+    
+    var email = document.getElementById("fos_user_registration_form_email").value; // Get email value from form
+    var username = document.getElementById("fos_user_registration_form_username").value; // Get username value from form
+    var passFirst = document.getElementById("fos_user_registration_form_plainPassword_first").value; // Get first pass value from form
+    var passSecond = document.getElementById("fos_user_registration_form_plainPassword_second").value; // Get second pass value from form
+    var token = document.getElementById("fos_user_registration_form__token").value; // Get token value from form
+
+    $.post( $rootScope.serverURL + "/register/", { 'fos_user_registration_form[email]': email, 'fos_user_registration_form[username]': username, 'fos_user_registration_form[plainPassword][first]': passFirst, 'fos_user_registration_form[plainPassword][second]': passSecond, 'fos_user_registration_form[_token]': token}, function( data ) {
+        //data.stats es true o false
+        serverAnswer = data.stats;
+        //Clear answers in localStorage when match finished
+        if(serverAnswer == 'true') {
+          alert(data);
+        }
+    }, "json");
   }
-  $scope.registerNewUser("asd@asd.com", "jajaja", "asd", "asd", "123");
   // ***** END REGISTER USER *****
+
+
 
 }])

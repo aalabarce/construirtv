@@ -1,41 +1,26 @@
-<!--PROYECTOS EN DESARROLLO -->
-<article class="cont-detalles pb0">
-	<h1 class="pull-left">{{languageProyectos.title}}</h1>
-	<div class="clearfix"></div>
-	<div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-	<div class="cont-proyectos-des col-lg-10 col-md-10 col-sm-12 col-xs-12">
-		<div class="well-none">
-            <carousel class="carousel slide">
-                <!-- Carousel items -->
-                <slide  ng-repeat="t in proyectos"> <!-- Create a slide every 4 proyectos -->
-                    <div class="row">
-                        <div class="col-sm-3 col-xs-6" ng-repeat="proyecto in proyectos[$index]">
-                        	<a href="#/proyecto/{{proyecto.id}}" class="thumbnail">
-                        		<div class="info-hover">
-                        			<p ng-show="proyecto.duracion">{{languageProyectos.duration}}: <b>{{proyecto.duracion}} min</b></p> <!-- CHANGE -->
-									<p ng-show="proyecto.director">{{languageProyectos.director}}: <b>{{proyecto.director}}</b></p>
-									<p ng-show="proyecto.pais">{{languageProyectos.country}}: <b>{{proyecto.pais}}</b></p>
-                        		</div>
-                        		<img ng-src="{{imagesSrc}}/proyecto/caratula/{{proyecto.id}}.jpg" alt="Image" class="img-responsive">
-                        		
-                        	</a>
-                        	<h3 class="text-center">{{proyecto.tituloEspaniol}}</h3>
-                        </div>
-                    </div>
-                    <!--/row-->
-                </slide>
-                <!--/item-->
-            </carousel>
-            <!--/myCarousel-->
+<!-- REGISTRACION -->
+<div class="row cont-log">
+    <div class="conte-log">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cont-registrarse centeredX">
+            <section>
+                <!--<h1><img src="images/logo.png" class="img-responsive" alt="" /></h1>-->
+                <p>registrate</p>
+                <div ng-bind-html="formFromAPI"></div>
+                
+                <!--
+                <input placeholder="Email..." type="text" />
+                <input placeholder="Nombre..." type="text" />
+                <input placeholder="Contraseña..." type="password" />
+                <input placeholder="Repetir contraseña..." type="password" class="last" />
+                -->
+                <a href="javascript:void(0)" class="btn-enviar-log text-center pull-right" ng-click="registerNewUser()">enviar</a>
+                <div class="cont-reg">
+                    <a href="#/" class="olvide pull-left">ya tengo una cuenta</a>
+                    <!--<a href="#" class="registrate pull-right">registrate</a>-->
+                </div>
+            </section>
         </div>
-        <!--/well-->
-        <!-- Preloader -->
-        <div class="preloader" ng-hide="proyectos">
-            <img ng-src="/web/bundles/bloodwindowbw/theme/images/loader.GIF">
-        </div>
-        <!-- /Preloader -->
-	</div>
-	<div class="col-lg-1 col-md-1 hidden-sm hidden-xs"></div>
-	<div class="clearfix"></div>
-</article>
-<div class="clearfix"></div>
+    </div>
+</div>
+<!-- REGISTRACION -->
+

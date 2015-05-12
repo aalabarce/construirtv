@@ -1287,7 +1287,7 @@ footer.redes .item-red{
     border-radius: 150px;
     box-sizing: border-box;
     height: 150px;
-    line-height: 165px;
+    line-height: 0px;
     margin: 0 auto;
     overflow: hidden;
     padding: 15px;

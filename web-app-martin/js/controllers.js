@@ -26,6 +26,7 @@ angular.module('construirTVControllers', [])
 
   // ***** LOOK IN LOCAL STORAGE FOR VALID TOKEN *****
   $rootScope.validateToken = function() {
+    $rootScope.confirmedToken = false; // Token has not been confirmed
     // Look in local storage for token
     if(window.localStorage['access_token']) {
       // ***** START API ***** Validate token
@@ -36,6 +37,7 @@ angular.module('construirTVControllers', [])
         })
         .success(function(data, status){
             console.log(data, status);  //remove for production
+            $rootScope.confirmedToken = true; // Token has been confirmed, user can acces to titulos data
         })
         .error(function(data, status){
             $scope.openLogin();
@@ -162,7 +164,7 @@ angular.module('construirTVControllers', [])
   $scope.getDestacados = function() {
     $http({
     method: 'GET',
-    url: $rootScope.serverURL + "/api/titulos/destacados/"
+    url: $rootScope.serverURL + "/api/titulos/destacados/" + "?access_token=" + window.localStorage['access_token']
     })
     .success(function(data, status){
         $scope.slides = data;
@@ -243,7 +245,7 @@ angular.module('construirTVControllers', [])
     } else { // Used when I want the titles from ONE gender
         $http({
           method: 'GET',
-          url: $rootScope.serverURL + "/api/titulos_serie/" + genderID // CHECK THIS
+          url: $rootScope.serverURL + "/api/titulos_genero/" + genderID // CHECK THIS
         })
         .success(function(data, status){
             $scope.filterTitles = data;
@@ -303,25 +305,37 @@ angular.module('construirTVControllers', [])
 
   $scope.id = $routeParams.tituloId;
 
+  // Check if Token has been confirmed or not before colling API
+  $scope.$watch('confirmedToken', function(newValue, oldValue) {
+    if (newValue !== oldValue) { // Ignore the initial load when watching model changes
+      if($rootScope.confirmedToken) $scope.getTitleDetails(); // Token has been confirmed, call the API and get the titulo data
+      else return; // Do nothing
+    }
+  });
+
   // ***** START API ***** Get proyecto detail
   $scope.showPreloader = true; // Show preloader gif
   $scope.tituloResult = true; // Set to true for showing label titles
-  $http({
-      method: 'GET',
-      url: $rootScope.serverURL + "/api/titulos/" + $scope.id
-  })
-  .success(function(data, status){
-      $scope.tituloResult = data;
-      $scope.showPreloader = false; // Hide preloader gif
-      $scope.getRelatedTitles($scope.tituloResult.serie.id); // Get related titles
-      console.log(data, status);  //remove for production
+  $scope.getTitleDetails = function() {
+    $http({
+        method: 'GET',
+        url: $rootScope.serverURL + "/api/titulos/" + $scope.id + "?access_token=" + window.localStorage['access_token']
+    })
+    .success(function(data, status){ // If token is OK
+        $scope.tituloResult = data;
+        $scope.showPreloader = false; // Hide preloader gif
+        $scope.getRelatedTitles($scope.tituloResult.serie.id); // Get related titles
+        console.log(data, status);  //remove for production
 
-  })
-  .error(function(data, status){
-      $scope.tituloResult = false; // Set to false for showing error pop up
-      $scope.showPreloader = false; // Hide preloader gif
-      console.log(data, status); //remove for production
-  });
+    })
+    .error(function(data, status){ // If token has expired
+        $scope.tituloResult = false; // Set to false for showing error pop up
+        $scope.showPreloader = false; // Hide preloader gif
+        console.log(data.error_description);
+        //$location.path("/").replace(); // Redirect to home
+        console.log(data, status); //remove for production
+    });
+  }
   // ***** END API *****
 
   // ***** START API ***** Get related titles based on this series
@@ -348,7 +362,7 @@ angular.module('construirTVControllers', [])
   // ***** START VIMEP VALIDATION URL *****
   $scope.videoReady = false;
   $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl("//player.vimeo.com/video/" + src);
+    return $sce.trustAsResourceUrl("//player.vimeo.com/video/" + src +"?wmode=transparent");
   }
 
   $timeout(function(){ // Set a delay for avoid showing "wrong video url"

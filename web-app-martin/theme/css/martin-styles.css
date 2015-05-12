@@ -32,6 +32,7 @@
 	overflow: hidden;
 	max-width: 100%;
 	height: auto;
+	z-index: 1031;
 }
 .embed-container iframe, .embed-container object, .embed-container embed { 
 	position: absolute;

@@ -28,7 +28,8 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
           controller: 'TitulosDetailCtrl',
           resolve: {
             validateToken: ['$http','$rootScope', function($http, $rootScope) {
-              $rootScope.validateToken();
+              return $rootScope.validateToken();
+
             }]
           }
         }).

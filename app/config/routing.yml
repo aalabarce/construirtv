@@ -47,7 +47,7 @@ api_titulos_serie:
     defaults: { _controller: "AppBundle:Api:obtenerTitulosPorSerie" }
     methods: GET
 
-api_titulos_serie:
+api_titulos_genero:
     path: api/titulos_genero/{genero_id}
     defaults: { _controller: "AppBundle:Api:obtenerTitulosPorGenero" }
     methods: GET    

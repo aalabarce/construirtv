@@ -35,6 +35,10 @@ class TitulosController extends Controller
      */
     public function createAction(Request $request)
     {
+        // Recibo el nombre de las imagenes subidas
+        $nombreArchivo = $request->request->get('nombreArchivo');
+        $nombreArchivoCarousel = $request->request->get('nombreArchivoCarousel');
+
         $entity = new Titulos();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -43,6 +47,24 @@ class TitulosController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            if (!empty($nombreArchivo))
+            {
+                $pathTemporal = $_SERVER['DOCUMENT_ROOT'] . "/uploads/temp/" . $nombreArchivo;
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/" . $entity->getId() . ".jpg";
+
+                // Renombro y muevo la imagen (Le pongo de nombre el id, y de extension jpg)
+                rename($pathTemporal, $path);
+            }
+
+            if(!empty($nombreArchivoCarousel))
+            {
+                $pathTemporal = $_SERVER['DOCUMENT_ROOT'] . "/uploads/carousel/temp/" . $nombreArchivoCarousel;
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/carousel/" . $entity->getId() . ".jpg";
+
+                // Renombro y muevo la imagen (Le pongo de nombre el id, y de extension jpg)
+                rename($pathTemporal, $path);
+            }
 
             return $this->redirect($this->generateUrl('titulos_show', array('id' => $entity->getId())));
         }
@@ -231,6 +253,46 @@ class TitulosController extends Controller
         $jsonContent = '{ "result": "success" }';
         $response = new Response($jsonContent);
         $response->headers->set('Content-Type', 'application/json');
+    }
+
+    /**
+    *   Sube una imagen de un corto a la carpeta temporal, para despues cuando es confirmado el cambio
+    *   es movida a la ruta definitiva
+    **/
+    public function subirImagenAction()
+    {
+
+        // outputdir: C:\wamp\www\bw\uploads\\temp\\
+        $output_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/temp/";
+        if(isset($_FILES["myfile"]))
+        {
+            $ret = array();
+
+            $error =$_FILES["myfile"]["error"];
+            //You need to handle  both cases
+            //If Any browser does not support serializing of multiple files using FormData() 
+            if(!is_array($_FILES["myfile"]["name"])) //single file
+            {
+                $fileName = $_FILES["myfile"]["name"];
+                move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.$fileName);
+                $ret[]= $fileName;
+            }
+            else  //Multiple files, file[]
+            {
+              $fileCount = count($_FILES["myfile"]["name"]);
+              for($i=0; $i < $fileCount; $i++)
+              {
+                $fileName = $_FILES["myfile"]["name"][$i];
+                move_uploaded_file($_FILES["myfile"]["tmp_name"][$i],$output_dir.$fileName);
+                $ret[]= $fileName;
+              }
+            
+            }
+            $response = new Response(json_encode($ret));
+            $response->headers->set('Content-Type', 'application/json'); 
+
+            return $response;
+         }
     }
 
     /**

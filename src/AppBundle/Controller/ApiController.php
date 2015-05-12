@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\HttpFoundation\Response;
+//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ApiController extends Controller
 {
@@ -115,13 +116,14 @@ class ApiController extends Controller
         $response = new Response($jsonContent);
         $response->headers->set('Content-Type', 'application/json');
 
-        return $response;
+        return $response; 
     }
 
     public function obtenerDetalleTituloAction($id)
     {
         /*if (false === $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) 
         {
+            //echo '{"error": "401 - Not Authorized"}';die;
             throw new AccessDeniedException();
         }
         else

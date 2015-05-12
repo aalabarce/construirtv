@@ -21,6 +21,8 @@
 
 {% block upload_photo_widget -%}
     <div id="fileuploader">Upload</div>
+    <input type="hidden" id="nombreArchivo" name="nombreArchivo">
+    <span id="imagen_subida"><img src="/uploads/__ID__.jpg" width="100"></span>
 {%- endblock %}
 
 {% block money_widget -%}

@@ -255,7 +255,7 @@ angular.module('construirTVControllers', [])
     } else { // Used when I want the titles from ONE gender
         $http({
           method: 'GET',
-          url: $rootScope.serverURL + "/api/titulos_genero/" + genderID // CHECK THIS
+          url: $rootScope.serverURL + "/api/titulos_genero/" + genderID
         })
         .success(function(data, status){
             $scope.filterTitles = data;
@@ -377,7 +377,7 @@ angular.module('construirTVControllers', [])
 
   $timeout(function(){ // Set a delay for avoid showing "wrong video url"
     $scope.videoReady = true;
-  }, 2000)
+  }, 3000)
   // ***** END VIMEP VALIDATION URL *****
 
 }])
@@ -389,6 +389,7 @@ angular.module('construirTVControllers', [])
   $rootScope.currentUrl = "/register";
   window.scrollTo(0,0);
 
+ // ***** GET THE TOKEN FROM THE FORM TO REGISTER NEW USER *****
   $scope.getFromFromAPI = function() {
     $scope.showPreloader = true; // Show preloader gif
     $http({
@@ -404,32 +405,96 @@ angular.module('construirTVControllers', [])
     });
   }
 
-  $scope.renderHtml = function(html_code) {
+  $scope.renderHtml = function(html_code) { // Render text as HTML
       return $sce.trustAsHtml(html_code);
   };
 
   $scope.getFromFromAPI();
+  // ***** END GET THE TOKEN FROM THE FORM TO REGISTER NEW USER *****
 
   // ***** REGISTER USER *****
   $scope.registerNewUser = function() {
-    
-    var email = document.getElementById("fos_user_registration_form_email").value; // Get email value from form
-    var username = document.getElementById("fos_user_registration_form_username").value; // Get username value from form
-    var passFirst = document.getElementById("fos_user_registration_form_plainPassword_first").value; // Get first pass value from form
-    var passSecond = document.getElementById("fos_user_registration_form_plainPassword_second").value; // Get second pass value from form
-    var token = document.getElementById("fos_user_registration_form__token").value; // Get token value from form
 
-    $.post( $rootScope.serverURL + "/register/", { 'fos_user_registration_form[email]': email, 'fos_user_registration_form[username]': username, 'fos_user_registration_form[plainPassword][first]': passFirst, 'fos_user_registration_form[plainPassword][second]': passSecond, 'fos_user_registration_form[_token]': token}, function( data ) {
-        //data.stats es true o false
-        serverAnswer = data.stats;
-        //Clear answers in localStorage when match finished
-        if(serverAnswer == 'true') {
-          alert(data);
-        }
-    }, "json");
+    //var email = document.getElementById("fos_user_registration_form_email").value; // Get email value from form
+    //var username = document.getElementById("fos_user_registration_form_username").value; // Get username value from form
+    //var passFirst = document.getElementById("fos_user_registration_form_plainPassword_first").value; // Get first pass value from form
+    //var passSecond = document.getElementById("fos_user_registration_form_plainPassword_second").value; // Get second pass value from form
+    
+    var token = document.getElementById("fos_user_registration_form__token").value; // Get token value from the form returned by the firt API call
+
+    $.post( $rootScope.serverURL + "/register/", { 'fos_user_registration_form[email]': $scope.userEmailImput, 'fos_user_registration_form[username]': $scope.userNamelImput, 'fos_user_registration_form[plainPassword][first]': $scope.userPassImput, 'fos_user_registration_form[plainPassword][second]': $scope.userPass2Imput, 'fos_user_registration_form[_token]': token}, "json")
+    .success(function(data) {
+      $scope.registrationData = data;
+      $scope.checkForErrors(data);
+    });
+
   }
   // ***** END REGISTER USER *****
 
+  // ***** CHECK REGISTRATION ERRORS *****
+  $scope.checkForErrors = function(data) {
 
+    $scope.emailUsed = false;
+    $scope.emailInvalid = false;
+    $scope.userlUsed = false;
+    $scope.passwordsNotMatching = false;
+    $scope.passwordsTooShort = false;
 
+    // Email already used
+    if (data.indexOf("La dirección de correo ya está en uso") != -1) {
+      $scope.emailUsed = true;
+    }
+    // Not valid email
+    if (data.indexOf("La dirección de correo no es válida") != -1) {
+      $scope.emailInvalid = true;
+    }
+    // User already used
+    if (data.indexOf("El nombre de usuario ya está en uso") != -1) {
+      $scope.userlUsed = true;
+    }
+    // Pasword not matching
+    if (data.indexOf("Las dos contraseñas no coinciden") != -1) {
+      $scope.passwordsNotMatching = true;
+    }
+    // Pasword too short
+    if (data.indexOf("La contraseña es demasiado corta") != -1) {
+      $scope.passwordsTooShort = true;
+    }
+    // No errors
+    if($scope.emailUsed == false && $scope.emailInvalid == false && $scope.userlUsed == false && $scope.passwordsNotMatching == false && $scope.passwordsTooShort == false) {
+      $scope.userLoginAfterRegistration($scope.userEmailImput, $scope.userPassImput); // Log in the user
+      $location.path("/").replace(); // Redirect to home after login
+    }
+
+  }
+  // ***** END CHECK REGISTRATION ERRORS *****
+
+  // ***** LOGIN USER (SIMPLER VERSION) *****
+  $scope.userLoginAfterRegistration = function(email, password) {
+      // ***** START API ***** Get token
+      $http({
+        method: 'GET',
+        url: $rootScope.serverURL + "/oauth/v2/token?client_id=" + $rootScope.client_id + "&client_secret=" + $rootScope.client_secret + "&grant_type=password&username=" + email + "&password=" + password
+        })
+        .success(function(data, status){
+            // Save user name in local storage
+            window.localStorage['user_name'] = data.user;
+            $rootScope.userName = window.localStorage['user_name'];
+            // Save token in local storage
+            window.localStorage['access_token'] = data.access_token;
+            // Validate token
+            $rootScope.validateToken();
+        })
+        .error(function(data, status){
+            $scope.errorLogin = true; // Show error msg
+            console.log(data, status); //remove for production
+      });
+      // ***** END API *****
+  }
+  // ***** END LOGIN USER (SIMPLER VERSION) *****
+
+}])
+
+.controller('WelcomeCtrl', ['$scope', '$routeParams', '$http', '$rootScope', '$location', '$sce', function($scope, $routeParams, $http, $rootScope, $location, $sce) {
+  //Do something
 }])

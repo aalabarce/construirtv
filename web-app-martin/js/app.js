@@ -37,6 +37,10 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
           templateUrl: 'templates/content.registro.html',
           controller: 'RegistroCtrl'
         }).
+        when('/welcome', {
+          templateUrl: 'templates/content.welcome.html',
+          controller: 'WelcomeCtrl'
+        }).
         otherwise({
           redirectTo: '/'
         });

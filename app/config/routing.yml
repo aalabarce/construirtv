@@ -58,6 +58,11 @@ api_titulo_detalle:
     methods: GET
 
 api_titulos_destacados:
-    path: api/titulos/destacados/
+    path: api/titulos_destacados/
     defaults: { _controller: "AppBundle:Api:obtenerTitulosDestacados" }
     methods: GET    
+
+api_buscador:
+    path: api/buscar/{query}
+    defaults: { _controller: "AppBundle:Api:buscador" }
+    methods: GET

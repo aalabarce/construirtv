@@ -1,20 +1,19 @@
 {% extends '::base_crud.html.twig' %}
 
 {% block body -%}
-    <h1>Titulos list</h1>
+    <h1>Listado de t&iacute;tulos</h1>
 
     <table class="records_list table table-striped table-bordered table-condensed table-hover">
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Nrocapitulo</th>
+                <th>Nro de capitulo</th>
                 <th>Duracion</th>
                 <th>Temporada</th>
                 <th>Subtitulado</th>
-                <th>Sinopsis</th>
-                <th>Urlvimeo</th>
+                <th>URL de vimeo</th>
                 <th>Destacado</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +24,6 @@
                 <td>{{ entity.duracion }}</td>
                 <td>{{ entity.temporada }}</td>
                 <td>{{ entity.subtitulado }}</td>
-                <td>{{ entity.sinopsis }}</td>
                 <td>{{ entity.urlVimeo }}</td>
                 <td>{{ entity.destacado }}</td>
                 <td>
@@ -39,7 +37,7 @@
         <ul>
         <li>
             <a href="{{ path('titulos_new') }}">
-                Create a new entry
+                Crear un nuevo registro
             </a>
         </li>
     </ul>

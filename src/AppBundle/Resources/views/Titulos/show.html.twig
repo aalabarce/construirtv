@@ -6,40 +6,36 @@
     <table class="record_properties">
         <tbody>
             <tr>
-                <th>Nombre</th>
+                <th>Nombre:&nbsp;</th>
                 <td>{{ entity.nombre }}</td>
             </tr>
             <tr>
-                <th>Nrocapitulo</th>
+                <th>Nro de capitulo:&nbsp;</th>
                 <td>{{ entity.nroCapitulo }}</td>
             </tr>
             <tr>
-                <th>Duracion</th>
+                <th>Duracion:&nbsp;</th>
                 <td>{{ entity.duracion }}</td>
             </tr>
             <tr>
-                <th>Temporada</th>
+                <th>Temporada:&nbsp;</th>
                 <td>{{ entity.temporada }}</td>
             </tr>
             <tr>
-                <th>Subtitulado</th>
-                <td>{{ entity.subtitulado }}</td>
+                <th>Subtitulado:&nbsp;</th>
+                <td>{{ entity.subtitulado == "1" ? "S&iacute;": "No" }}</td>
             </tr>
             <tr>
-                <th>Sinopsis</th>
+                <th>Sinopsis:&nbsp;</th>
                 <td>{{ entity.sinopsis }}</td>
             </tr>
             <tr>
-                <th>Urlvimeo</th>
+                <th>URL de vimeo:&nbsp;</th>
                 <td>{{ entity.urlVimeo }}</td>
             </tr>
             <tr>
-                <th>Destacado</th>
-                <td>{{ entity.destacado }}</td>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <th>Destacado:&nbsp;</th>
+                <td>{{ entity.destacado == "1" ? "S&iacute;": "No" }}</td>
             </tr>
         </tbody>
     </table>
@@ -47,12 +43,12 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('titulos') }}">
-            Back to the list
+            Volver al listado
         </a>
     </li>
     <li>
         <a href="{{ path('titulos_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

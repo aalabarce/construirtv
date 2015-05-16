@@ -158,4 +158,35 @@ class ApiController extends Controller
 
         return $response;
     }
+
+    public function buscadorAction($query)
+    {
+        // set doctrine
+
+        $titulosHome = $this->getDoctrine()->getManager()->getConnection();
+
+        // prepare statement
+
+        $sql = "SELECT t.id, t.nombre, t.sinopsis, s.nombre as serie, g.nombre as genero
+                    FROM titulos t
+                    LEFT JOIN series s ON t.serie_id = s.id
+                    JOIN generos g ON t.genero_id = g.id
+                WHERE 
+                t.nombre LIKE '%" . $query . "%'
+                OR t.sinopsis LIKE '%" . $query . "%'
+                OR s.nombre LIKE '%" . $query . "%'
+                OR s.sinopsis LIKE '%" . $query . "%'
+                OR g.nombre LIKE '%" . $query . "%';";
+       
+        $sth = $titulosHome->prepare($sql);
+
+        // execute and fetch
+        $sth->execute();
+        $result = $sth->fetchAll();    
+
+        $response = new Response(json_encode($result));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
 }

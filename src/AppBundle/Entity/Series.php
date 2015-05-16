@@ -15,6 +15,11 @@ class Series
     private $nombre;
 
     /**
+     * @var string
+     */
+    private $sinopsis;
+
+    /**
      * @var integer
      */
     private $id;
@@ -41,6 +46,29 @@ class Series
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set sinopsis
+     *
+     * @param string $nombre
+     * @return Series
+     */
+    public function setSinopsis($sinopsis)
+    {
+        $this->sinopsis = $sinopsis;
+
+        return $this;
+    }
+
+    /**
+     * Get sinopsis
+     *
+     * @return string 
+     */
+    public function getSinopsis()
+    {
+        return $this->sinopsis;
     }
 
     /**

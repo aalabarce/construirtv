@@ -33,40 +33,7 @@
   <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'> <!-- GOOGLE FONT OSWALD -->
   <!-- JQUERY -->
   <script src="theme/js/respond.js"></script> <!-- llamado a RESPOND para hacer que IE viejos entienda la semantica de HTML5. ESTE VA ARRIBA -->
-  <script>
-      function toggleCodes(on) {
-        var obj = document.getElementById('icons');
-        
-        if (on) {
-          obj.className += ' codesOn';
-        } else {
-          obj.className = obj.className.replace(' codesOn', '');
-        }
-      }
-      $(document).ready(
-        function(){
-          $('#myTab a').click(function (e) {
-        e.preventDefault()
-        $(this).tab('show')
-      });
 
-      $('#carousel-proyectos').carousel({
-        interval: 0
-        })
-          
-          $('#carousel-proyectos').on('slid.bs.carousel', function() {
-            //alert("slid");
-      });
-      $('#carousel-works').carousel({
-        interval: 0
-        })
-          
-          $('#carousel-works').on('slid.bs.carousel', function() {
-            //alert("slid");
-      });
-        }
-      )
-    </script>
   
   <title>:: Home   |   Construir TV ::</title>
   <link rel="shortcut icon" href="favicon.ico" type="theme/image/x-icon">

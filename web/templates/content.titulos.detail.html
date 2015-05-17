@@ -1,0 +1,94 @@
+<!--CONTENIDO DETALLE TITULO -->
+<article class="cont-detalles">
+	<h1 class="">{{tituloResult.nombre}}</h1>
+	<div class="clearfix"></div>
+	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs"></div>
+	<div class="cont-detalle-proyecto col-lg-8 col-md-8 col-sm-12 col-xs-12">
+		<div class="proyecto-video col-lg-12 col-md-12 col-sm-12 col-xs-12 embed-container" ng-show="tituloResult.urlVimeo">
+			<!-- <img src="{{imagesSrc}}/titulos/{{tituloResult.id}}.jpg" class="img-responsive" alt="" /> -->
+
+	        <!-- Preloader -->
+	        <div class="preloader" ng-hide="videoReady">
+	        	<br />
+	            <img ng-src="{{themeImagesSrc}}/preloader.GIF" width="24px" height="24px">
+	            <br />
+	            <br />
+	        </div>
+	        <!-- /Preloader -->
+
+			<iframe ng-show="videoReady" ng-src="{{trustSrc(tituloResult.urlVimeo)}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen class="img-responsive"></iframe>
+		</div>
+		<div class="clearfix"></div>
+		<div class="proyecto-info col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<p ng-show="tituloResult.serie.nombre">
+					<b>Título de la serie: </b> <br />
+					{{tituloResult.serie.nombre}}
+				</p>
+				<p ng-show="tituloResult.nombre">
+					<b>Titulo del capitulo: </b> <br />
+					{{tituloResult.nombre}}
+				</p>
+				<p ng-show="tituloResult.duracion">
+					<b>Duración (capitulo):  </b> <br />
+					{{tituloResult.duracion}}' min
+				</p>
+				<p ng-show="tituloResult.subtitulado">
+					<b>Subtitulado: </b> <br />
+					Si
+				</p>
+				<p ng-show="tituloResult.subtitulado == false">
+					<b>Subtitulado: </b> <br />
+					No
+				</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<p ng-show="tituloResult.genero.nombre">
+					<b>Genero:</b> <br />
+					{{tituloResult.genero.nombre}} 
+				</p>
+				<p ng-show="tituloResult.nroCapitulo">
+					<b>N° del Capitulo: </b> <br />
+					{{tituloResult.nroCapitulo}}
+				</p>
+				<p ng-show="tituloResult.temporada">
+					<b>Temporada: </b> <br />
+					{{tituloResult.temporada}}
+				<p ng-show="tituloResult.sinopsis">
+					<b>Sinopsis: </b> <br />					
+					{{tituloResult.sinopsis}}
+				</p>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs"></div>
+	<div class="clearfix"></div>
+</article>
+
+<aside class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-relacionados">
+	<h2 class="">Titulos Rerlacionados</h2>
+		<div class="well-none">
+
+            <carousel class="carousel slide">
+                <!-- Carousel items -->
+                <slide  ng-repeat="t in relatedTitles"> <!-- Create a slide every 6 genders -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 item-programa" ng-repeat="relatedTitle in relatedTitles[$index]">
+                        	<a href="#titles/{{relatedTitle.id}}" class="thumbnail" >
+                        		<div class="item-hover">
+                        			<span>{{relatedTitle.nombre}}</span>
+                        		</div>
+                        		<img src="{{imagesSrc}}/titulos/{{relatedTitle.id}}.jpg" alt="Image" class="img-responsive">
+                        	</a>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </slide>
+                <!--/item-->
+            </carousel>
+            <!--/myCarousel-->
+
+        </div>
+        <!--/well-->
+</aside>

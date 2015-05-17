@@ -74,8 +74,10 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
       if($location.host() == "bloodwindow.tv") { // For production
         $rootScope.serverURL = "/web"; // URL for real app
         $rootScope.imagesSrc = "/uploads";
+        $rootScope.themeImagesSrc = "/web/images";
       } else { // For development
         $rootScope.serverURL = "/web/app_dev.php"; // URL for working local
-        $rootScope.imagesSrc = "/web/uploads/";
+        $rootScope.imagesSrc = "/web-app-martin/uploads/";
+        $rootScope.themeImagesSrc = "/web/images";
       }
     }]);

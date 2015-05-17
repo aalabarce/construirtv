@@ -1,0 +1,51 @@
+<!-- REGISTRACION -->
+<div class="row cont-log">
+    <div class="conte-log">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 cont-registrarse centeredX">
+            <section>
+                <!--<h1><img src="images/logo.png" class="img-responsive" alt="" /></h1>-->
+
+                <p>registrate</p>
+
+                <!-- Display errors -->
+                <div class="row">
+                    <div class="alert alert-danger" role="alert" ng-show="emailUsed">
+                        La dirección de correo ya está en uso
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="emailInvalid">
+                        La dirección de correo no es válida
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="userlUsed">
+                        El nombre de usuario ya está en uso
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="passwordsNotMatching">
+                        Las dos contraseñas no coinciden
+                    </div>
+                    <div class="alert alert-danger" role="alert" ng-show="passwordsTooShort">
+                        La contraseña es demasiado corta
+                    </div>
+                </div>
+                <!-- End dispay errors -->
+
+                <div ng-hide="true" ng-bind-html="formFromAPI"></div> <!-- Hide form returned by API -->
+                
+                <form ng-submit="registerNewUser()">
+
+                    <input placeholder="Email..." ng-model="userEmailImput" type="email" required />
+                    <input placeholder="Nombre..." ng-model="userNamelImput" type="text" required />
+
+                    <input placeholder="Contraseña..." ng-model="userPassImput" type="password" pattern=".{6,}" required />
+                    <input placeholder="Repetir contraseña..." ng-model="userPass2Imput" type="password" class="last" pattern=".{6,}" required />
+                    
+                    <button type="submit" class="btn-enviar-log text-center pull-right">enviar</button>
+                    <div class="cont-reg">
+                        <a href="#/" class="olvide pull-left">ya tengo una cuenta</a>
+                        <!--<a href="#" class="registrate pull-right">registrate</a>-->
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- REGISTRACION -->
+

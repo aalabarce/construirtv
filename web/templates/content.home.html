@@ -1,0 +1,106 @@
+<!--slider -->
+<article class="slide">
+	<section class="block">
+		<carousel interval="myInterval" ng-show="showCarousel" class="carousel slide fade-in">
+	        <!-- Preloader -->
+	        <div class="preloader" ng-hide="slides">
+	            <img ng-src="{{themeImagesSrc}}/preloader.GIF" width="24px" height="24px">
+	        </div>
+	        <!-- /Preloader -->
+		  	<slide ng-repeat="slide in slides" active="slide.active" ng-click="openCortoDetail(slide.id)" class="pointerCursor">
+		  		<a href="#titles/{{slide.id}}">
+	            	<div class="desc-item col-lg-12 col-md-12 hidden-sm hidden-xs" style="text-align: left;">
+	            		<h1>{{slide.nombre}}</h1>
+	            		<div class="info-item">
+	            			<div class="main-detail-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
+		            			<!--<h2>Historia Universal Construccion</h2>-->
+		            			<p>{{slide.sinopsis}}
+								</p>
+	            			</div>
+							<div class="detail-info-item col-lg-3 col-md-3 col-sm-3 col-xs-3">
+								<p class="titulo-serie">Titulo de la serie: <b>{{slide.serie.nombre}}</b> </p>
+								<p class="genero">Genero: <b>{{slide.genero.nombre}}</b></p>
+								<p class="duracion">Duracion: <b>{{slide.duracion}}</b></p>
+							</div>
+	            		</div>
+	            	</div>
+
+                	<img ng-src="{{imagesSrc}}/carousel/{{slide.id}}.jpg" alt="Slide{{slide.id}}" />
+            	</a>
+		  	</slide>
+		</carousel>
+		<!-- Show when user is searching for something -->
+		<div class=".col-lg-12 col-md-12 col-sm-12 col-xs-12 resu">
+			<p ng-hide="showCarousel">{{languageHome.resultsText}}: {{searchInputText}}</p>
+		</div>
+	</section>
+</article>
+
+<section class="programas">
+	<h3>Generos</h3>
+	<div class="cont-proyectos-des col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="well-none">
+
+            <carousel class="carousel slide">
+                <!-- Carousel items -->
+                <slide  ng-repeat="t in generos"> <!-- Create a slide every 6 genders -->
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 item-programa" ng-repeat="genero in generos[$index]" ng-class="{active: '{{gender.id}}' == searchFestival}" ng-click="setCurrentGender(genero.id, genero.nombre)">
+                        	<a href="javascript:void(0)" class="thumbnail" scroll-to="titlesResults" offset="83">
+                        		<div class="item-hover">
+                        			<span>+</span>
+                        		</div>
+                        		<img src="{{imagesSrc}}/generos/{{genero.id}}.jpg" alt="Image" class="img-responsive">
+                        	</a>
+                        	<h3 class="text-center">{{genero.nombre}}</h3>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </slide>
+                <!--/item-->
+            </carousel>
+            <!--/myCarousel-->
+
+        </div>
+        <!--/well-->
+	</div>
+</section>
+
+<section class="cat-movies" id="titlesResults">
+	<h3>{{searchGenderName}}</h3>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-cortos-des">
+		<!--
+		<ul class="nav nav-tabs listado-tabs" role="tablist">
+			<li class="active">
+				<a>{{searchGenderName}}</a>
+			</li>
+		</ul>
+		-->
+		<div class="tab-content" id="myTabContent">
+	      <div id="sitges">
+	        <div class="item-listado-tab">
+	        	<h1 ng-show="filterTitles.length == 0" class="notFoundMsg">{{languageHome.noResultsText}}</h1>
+		        <!-- Preloader -->
+		        <div class="preloader" ng-show="showPreloader">
+		        	<br />
+		            <img ng-src="{{themeImagesSrc}}/preloader.GIF" width="24px" height="24px">
+		            <br />
+		            <br />
+		        </div>
+		        <!-- /Preloader -->
+	        	<div class="col-xs-12 col-sm-6 col-lg-4 thumb fade-in result{{$index}}" ng-repeat="title in filterTitles">
+	        		<a href="#titles/{{title.id}}">
+	        			<div class="desc-item-listado pointerCursor">
+	        				<h3>{{title.nombre}}</h3>
+	        				<p ng-show="title.genero">{{languageHome.gender}}: <span>{{title.genero.nombre}}</span></p>
+	        				<p ng-show="title.serie">{{languageHome.series}}: <span>{{title.serie.nombre}}</span></p>
+	        				<p ng-show="title.duracion">{{languageHome.duration}}: <span>{{title.duracion}}</span></p>
+	        			</div>
+	        			<img ng-src="{{imagesSrc}}/titulos/{{title.id}}.jpg" class="img-responsive">
+	        		</a>
+	        	</div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</section>

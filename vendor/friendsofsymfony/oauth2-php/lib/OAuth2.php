@@ -839,7 +839,7 @@ class OAuth2
             $scope = $input["scope"];
         }
 
-        $token = $this->createAccessToken($client, $stored['data'], $scope, $stored['access_token_lifetime'], $stored['issue_refresh_token'], $stored['refresh_token_lifetime'], $input);
+        $token = $this->createAccessToken($client, $stored['data'], $scope, $stored['access_token_lifetime'], $stored['issue_refresh_token'], $stored['refresh_token_lifetime'], $stored["data"]->getUsername());
 
         return new Response(json_encode($token), 200, $this->getJsonHeaders());
     }
@@ -1308,14 +1308,14 @@ class OAuth2
      *
      * @ingroup oauth2_section_5
      */
-    public function createAccessToken(IOAuth2Client $client, $data, $scope = null, $access_token_lifetime = null, $issue_refresh_token = true, $refresh_token_lifetime = null, $input = null)
+    public function createAccessToken(IOAuth2Client $client, $data, $scope = null, $access_token_lifetime = null, $issue_refresh_token = true, $refresh_token_lifetime = null, $username = null)
     {
         $token = array(
             "access_token" => $this->genAccessToken(),
             "expires_in" => ($access_token_lifetime ?: $this->getVariable(self::CONFIG_ACCESS_LIFETIME)),
             "token_type" => $this->getVariable(self::CONFIG_TOKEN_TYPE),
             "scope" => $scope,
-            "user" => $input["username"],
+            "user" => $username,
         );
 
         $this->storage->createAccessToken(

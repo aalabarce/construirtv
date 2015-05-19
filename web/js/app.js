@@ -9,7 +9,7 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
       $routeProvider.
         when('/', {
-          templateUrl: 'templates/content.home.html',
+          templateUrl: '../templates/content.home.html',
           controller: 'HomeCtrl'
         }).
         /*
@@ -24,7 +24,7 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
         }).
         */
         when('/titles/:tituloId', {
-          templateUrl: 'templates/content.titulos.detail.html',
+          templateUrl: '../templates/content.titulos.detail.html',
           controller: 'TitulosDetailCtrl',
           resolve: {
             validateToken: ['$http','$rootScope', function($http, $rootScope) {
@@ -34,11 +34,11 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
           }
         }).
         when('/register', {
-          templateUrl: 'templates/content.registro.html',
+          templateUrl: '../templates/content.registro.html',
           controller: 'RegistroCtrl'
         }).
         when('/welcome', {
-          templateUrl: 'templates/content.welcome.html',
+          templateUrl: '../templates/content.welcome.html',
           controller: 'WelcomeCtrl'
         }).
         otherwise({
@@ -77,7 +77,7 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
         $rootScope.themeImagesSrc = "/web/images";
       } else { // For development
         $rootScope.serverURL = "/web/app_dev.php"; // URL for working local
-        $rootScope.imagesSrc = "/web-app-martin/uploads/";
+        $rootScope.imagesSrc = "/web/uploads/";
         $rootScope.themeImagesSrc = "/web/images";
       }
     }]);

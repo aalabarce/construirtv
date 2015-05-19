@@ -82,7 +82,7 @@ angular.module('construirTVControllers', [])
     $rootScope.language = thisLanguage;
     $http({
     method: 'GET',
-    url: "languages/" + thisLanguage + ".json"
+    url: "../languages/" + thisLanguage + ".json"
     })
     .success(function(data, status){
         $rootScope.languageHeader = data.header; // All tags used in HeaderCtrl

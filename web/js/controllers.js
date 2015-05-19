@@ -71,6 +71,17 @@ angular.module('construirTVControllers', [])
       $rootScope.searchInputText = $scope.searchInput;
     }
   }
+
+  $scope.$watch('searchInputText', function(newValue, oldValue) {
+    if (newValue !== oldValue) { 
+      $scope.searchInput = $rootScope.searchInputText;
+    }
+  });
+
+  $scope.cancelSearch = function() {
+    $rootScope.searchInputText = "";
+  }
+
 }])
 
 .controller('languageCtrl', ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
@@ -161,15 +172,14 @@ angular.module('construirTVControllers', [])
 
 }])
 
-// **************************************** HASTA ACA LLEGUE ****************************************
-
 .controller('HomeCtrl', ['$scope', '$http', '$rootScope', '$modal', '$location', '$routeParams', function($scope, $http, $rootScope, $modal, $location, $routeParams) {
   // Set the value to variable for updating class active in header menu
   // In this case harcode the URL for showing active HOME in menu, besides the cortoID (if any)
   $rootScope.currentUrl = "/";
+  $rootScope.searchInputText = "";
   window.scrollTo(0,0);
 
-  // ***** START API ***** Get Destacados titles */*/*/*/*/NOT FINISHED (BAD API)/*/*/*/*/*/
+  // ***** START API ***** Get Destacados titles
   $scope.slides = "";
   $scope.getDestacados = function() {
     $http({
@@ -186,27 +196,28 @@ angular.module('construirTVControllers', [])
   }
   // ***** END API *****
 
-  // ***** START API ***** Get All titles with filters */*/*/*/*/NOT FINISHED (API NOT DEVELOPED)/*/*/*/*/*/
+  // ***** START API ***** Get All titles with filters
   $scope.filterTitles = true; // Set var to true for not showing error message
   $scope.getFilterTitles = function() {
     $scope.showPreloader = true; // Show preloader gif
-    $scope.searchGenero = ""; // Edit stored parameters
-    $scope.sendToAPI = '{"inputBuscador": "' + $scope.searchBuscador + '", "genero": "' + $scope.searchGenero + '", "festival": "' + $scope.searchFestival + '"}'; // inputBuscador take the value of 'titulo', 'anio' and 'director'
-    $http({
-        method: 'POST',
-        url: $rootScope.serverURL + "/buscar/corto",
-        data: $scope.sendToAPI
-    })
-    .success(function(data, status){
-        $scope.filterTitles = data;
-        $scope.showPreloader = false; // Hide preloader gif
-        console.log(data, status);  //remove for production
-    })
-    .error(function(data, status){
-        $scope.filterTitles = ""; // Set var to lenght cero for showing error message
-        $scope.showPreloader = false; // Hide preloader gif
-        console.log(data, status); //remove for production
-    });
+    if($scope.searchBuscador) { // If the search input is not empty
+      $http({
+          method: 'GET',
+          url: $rootScope.serverURL + "/api/buscar/" + $scope.searchBuscador
+      })
+      .success(function(data, status){
+          $scope.filterTitles = data;
+          $scope.showPreloader = false; // Hide preloader gif
+          console.log(data, status);  //remove for production
+      })
+      .error(function(data, status){
+          $scope.filterTitles = ""; // Set var to lenght cero for showing error message
+          $scope.showPreloader = false; // Hide preloader gif
+          console.log(data, status); //remove for production
+      });
+    } else { // When the search input is empty
+      $scope.setCurrentGender('all', 'Todos'); // Get all titles from all genders
+    }
   }
   // ***** END API *****
 
@@ -218,7 +229,10 @@ angular.module('construirTVControllers', [])
     })
     .success(function(data, status){
 
-        // Split the results in arrays of 4 elements
+        // Add 'todos' to api result before spliting the array. Set id to 'all' for genting all titles in getTitlesFromGender
+        data.unshift({'nombre': 'Todos', 'id': 'all'});
+        
+        // Split the results in arrays of 6 elements
         $scope.generos = [];
         while (data.length > 0)
         $scope.generos.push(data.splice(0, 6));
@@ -282,9 +296,12 @@ angular.module('construirTVControllers', [])
   $scope.$watch('searchInputText', function(newValue, oldValue) {
     if (newValue !== oldValue) { // Ignore the initial load when watching model changes
       window.scrollTo(0,0);
-      if($rootScope.searchInputText) $scope.showCarousel = false;
-      else $scope.showCarousel = true;
-      //$scope.searchFestival = ""; uncoment for reseting festivals to all
+      if($rootScope.searchInputText) {
+        $scope.showCarousel = false;
+      }
+      else {
+        $scope.showCarousel = true;
+      }
       $scope.searchBuscador = $rootScope.searchInputText;
       $scope.getFilterTitles(); // This function will be call when $rootScope.searchInputText changes.
     }

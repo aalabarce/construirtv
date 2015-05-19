@@ -13,7 +13,7 @@
 	            		<h1>{{slide.nombre}}</h1>
 	            		<div class="info-item">
 	            			<div class="main-detail-item col-lg-9 col-md-9 col-sm-9 col-xs-9">
-		            			<!--<h2>Historia Universal Construccion</h2>-->
+		            			<h2>&nbsp;</h2>
 		            			<p>{{slide.sinopsis}}
 								</p>
 	            			</div>
@@ -29,14 +29,10 @@
             	</a>
 		  	</slide>
 		</carousel>
-		<!-- Show when user is searching for something -->
-		<div class=".col-lg-12 col-md-12 col-sm-12 col-xs-12 resu">
-			<p ng-hide="showCarousel">{{languageHome.resultsText}}: {{searchInputText}}</p>
-		</div>
 	</section>
 </article>
 
-<section class="programas">
+<section class="programas" ng-show="showCarousel">
 	<h3>Generos</h3>
 	<div class="cont-proyectos-des col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="well-none">
@@ -67,7 +63,9 @@
 </section>
 
 <section class="cat-movies" id="titlesResults">
-	<h3>{{searchGenderName}}</h3>
+	<h3 ng-show="showCarousel">{{searchGenderName}}</h3> <!-- Show when user is NOT searching for something -->
+			
+	<h3 ng-hide="showCarousel">{{languageHome.resultsText}}: {{searchInputText}}</h3> <!-- Show when user is searching for something -->
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-cortos-des">
 		<!--
 		<ul class="nav nav-tabs listado-tabs" role="tablist">

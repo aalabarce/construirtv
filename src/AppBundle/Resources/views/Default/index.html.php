@@ -77,8 +77,9 @@
       
     <!--buscador -->
     <div class="buscador col-lg-6 col-md-6 col-sm-6 col-xs-12 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3" ng-class="'/' != currentUrl && 'vis-hidden'" ng-controller="SearchCtrl">
-      <input type="search" class="form-control" placeholder="{{languageSearch.inputSearch}}" ng-model="searchInput" ng-change="change()">
-      <a href="javascript:void(0)" class="glyphicon glyphicon-search btn-lupa"></a>
+      <input type="search" class="form-control" placeholder="{{languageSearch.inputSearch}}" ng-model="searchInput"  ng-model-options="{debounce: 1000}" ng-change="change()">
+      <a ng-hide="searchInput" class="glyphicon glyphicon-search btn-lupa"></a>
+      <a ng-show="searchInput" ng-click="cancelSearch()" href="javascript:void(0)" class="glyphicon glyphicon-remove btn-lupa"></a>
     </div>
     
     <div class="clearfix"></div>

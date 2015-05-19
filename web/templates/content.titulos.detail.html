@@ -21,10 +21,7 @@
 		<div class="clearfix"></div>
 		<div class="proyecto-info col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<p ng-show="tituloResult.serie.nombre">
-					<b>Título de la serie: </b> <br />
-					{{tituloResult.serie.nombre}}
-				</p>
+
 				<p ng-show="tituloResult.nombre">
 					<b>Titulo del capitulo: </b> <br />
 					{{tituloResult.nombre}}
@@ -32,6 +29,10 @@
 				<p ng-show="tituloResult.duracion">
 					<b>Duración (capitulo):  </b> <br />
 					{{tituloResult.duracion}}' min
+				</p>
+				<p ng-show="tituloResult.genero.nombre">
+					<b>Género:</b> <br />
+					{{tituloResult.genero.nombre}} 
 				</p>
 				<p ng-show="tituloResult.subtitulado">
 					<b>Subtitulado: </b> <br />
@@ -41,22 +42,27 @@
 					<b>Subtitulado: </b> <br />
 					No
 				</p>
+				<p ng-show="tituloResult.sinopsis">
+					<b>Sinopsis: </b> <br />					
+					{{tituloResult.sinopsis}}
+				</p>
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<p ng-show="tituloResult.genero.nombre">
-					<b>Genero:</b> <br />
-					{{tituloResult.genero.nombre}} 
+				<p ng-show="tituloResult.serie.nombre">
+					<b>Título de la serie: </b> <br />
+					{{tituloResult.serie.nombre}}
+				</p>
+				<p ng-show="tituloResult.temporada">
+					<b>Temporada: </b> <br />
+					{{tituloResult.temporada}}
 				</p>
 				<p ng-show="tituloResult.nroCapitulo">
 					<b>N° del Capitulo: </b> <br />
 					{{tituloResult.nroCapitulo}}
 				</p>
-				<p ng-show="tituloResult.temporada">
-					<b>Temporada: </b> <br />
-					{{tituloResult.temporada}}
-				<p ng-show="tituloResult.sinopsis">
-					<b>Sinopsis: </b> <br />					
-					{{tituloResult.sinopsis}}
+				<p ng-show="tituloResult.serie.sinopsis">
+					<b>Sinopsis de la serie: </b> <br />
+					{{tituloResult.serie.sinopsis}}
 				</p>
 			</div>
 			<div class="clearfix"></div>

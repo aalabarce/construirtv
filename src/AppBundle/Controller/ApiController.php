@@ -161,9 +161,26 @@ class ApiController extends Controller
 
     public function buscadorAction($query)
     {
+
+
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Titulos');
+                         
+        $sql_query = $repository->createQueryBuilder('t')
+            ->leftJoin('t.genero', 'g')
+            ->leftJoin('t.serie', 's')
+            ->where('t.nombre LIKE :query')
+            ->orWhere('t.sinopsis LIKE :query')
+            ->orWhere('t.sinopsis LIKE :query')
+            ->orWhere('s.nombre LIKE :query')
+            ->orWhere('g.nombre LIKE :query')
+            ->setParameter('query', '%'. $query .'%')
+            ->getQuery();
+         
+
+        $titulos = $sql_query->getResult();
         // set doctrine
 
-        $titulosHome = $this->getDoctrine()->getManager()->getConnection();
+       /* $titulosHome = $this->getDoctrine()->getManager()->getConnection();
 
         // prepare statement
 
@@ -182,9 +199,15 @@ class ApiController extends Controller
 
         // execute and fetch
         $sth->execute();
-        $result = $sth->fetchAll();    
+        $result = $sth->fetchAll();    */
 
-        $response = new Response(json_encode($result));
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new GetSetMethodNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $jsonContent = $serializer->serialize($titulos, 'json');
+
+        $response = new Response($jsonContent);
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;

@@ -4,11 +4,11 @@
 	<div class="clearfix"></div>
 	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs"></div>
 	<div class="cont-detalle-proyecto col-lg-8 col-md-8 col-sm-12 col-xs-12">
-		<div class="proyecto-video col-lg-12 col-md-12 col-sm-12 col-xs-12 embed-container" ng-show="tituloResult.urlVimeo">
+		<div class="proyecto-video col-lg-12 col-md-12 col-sm-12 col-xs-12 embed-container">
 			<!-- <img src="{{imagesSrc}}/titulos/{{tituloResult.id}}.jpg" class="img-responsive" alt="" /> -->
 
 	        <!-- Preloader -->
-	        <div class="preloader" ng-hide="videoReady">
+	        <div class="preloader" ng-show="showPreloader">
 	        	<br />
 	            <img ng-src="{{themeImagesSrc}}/preloader.GIF" width="24px" height="24px">
 	            <br />
@@ -16,7 +16,10 @@
 	        </div>
 	        <!-- /Preloader -->
 
-			<iframe ng-show="videoReady" ng-src="{{trustSrc(tituloResult.urlVimeo)}}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen class="img-responsive"></iframe>
+			<div ng-bind-html="loadHTMLplayer">
+
+			</div>
+
 		</div>
 		<div class="clearfix"></div>
 		<div class="proyecto-info col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -14,7 +14,7 @@ angular.module('construirTVControllers', [])
   $scope.openLogin = function () {
 
     var modalInstance = $modal.open({
-      templateUrl: 'templates/modals/modal.login.html',
+      templateUrl: '../templates/modals/modal.login.html',
       controller: 'LoginCtrl',
       size: 'lg',
       backdrop: 'static',
@@ -354,6 +354,7 @@ angular.module('construirTVControllers', [])
         $scope.getRelatedTitles($scope.tituloResult.serie.id); // Get related titles
         console.log(data, status);  //remove for production
 
+        $scope.loadHTMLplayer = $sce.trustAsHtml('<iframe ng-show="videoReady" src="//player.vimeo.com/video/' + $scope.tituloResult.urlVimeo + '?wmode=transparent" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen class="img-responsive"></iframe>');
     })
     .error(function(data, status){ // If token has expired
         $scope.tituloResult = false; // Set to false for showing error pop up
@@ -385,17 +386,6 @@ angular.module('construirTVControllers', [])
     });
   }
   // ***** END API *****
-
-  // ***** START VIMEP VALIDATION URL *****
-  $scope.videoReady = false;
-  $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl("//player.vimeo.com/video/" + src +"?wmode=transparent");
-  }
-
-  $timeout(function(){ // Set a delay for avoid showing "wrong video url"
-    $scope.videoReady = true;
-  }, 3000)
-  // ***** END VIMEP VALIDATION URL *****
 
 }])
 

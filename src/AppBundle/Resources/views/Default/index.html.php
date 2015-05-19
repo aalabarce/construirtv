@@ -35,7 +35,7 @@
   <script src="<?php echo $view['assets']->getUrl('js/lib/respond.js') ?>"></script> <!-- llamado a RESPOND para hacer que IE viejos entienda la semantica de HTML5. ESTE VA ARRIBA -->
   
   <title>:: Home   |   Construir TV ::</title>
-  <link rel="shortcut icon" href="favicon.ico" type="theme/image/x-icon">
+  <link rel="shortcut icon" href="/web/favicon.ico" type="theme/image/x-icon">
 
 </head>
 

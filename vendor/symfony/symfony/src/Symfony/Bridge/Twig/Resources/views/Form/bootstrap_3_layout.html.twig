@@ -22,7 +22,15 @@
 {% block upload_photo_widget -%}
     <div id="fileuploader">Upload</div>
     <input type="hidden" id="nombreArchivo" name="nombreArchivo">
-    <span id="imagen_subida"><img src="/uploads/__ID__.jpg" width="100"></span>
+    <span id="imagen_subida"></span>
+    <br>
+
+    <div id="upload_carousel" class="hidden">
+        <strong>Imagen destacado: (medidas recomendadas: 1350x560 px)</strong>
+        <div id="fileuploader_carousel">Upload</div>
+        <input type="hidden" id="nombreArchivoCarousel" name="nombreArchivoCarousel">
+        <span id="imagen_subida_carousel"></span>
+    </div>
 {%- endblock %}
 
 {% block money_widget -%}

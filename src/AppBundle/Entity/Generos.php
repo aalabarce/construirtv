@@ -19,6 +19,11 @@ class Generos
      */
     private $id;
 
+    /**
+     * @var integer
+     */
+    private $image;
+
 
     /**
      * Set nombre
@@ -56,5 +61,25 @@ class Generos
     public function __toString()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set image
+     *
+     * @return integer 
+     */
+    public function setUploadPhoto($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * Get image
+     *
+     * @return integer 
+     */
+    public function getUploadPhoto()
+    {
+        return $this->image;
     }
 }

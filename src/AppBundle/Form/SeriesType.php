@@ -16,7 +16,7 @@ class SeriesType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('sinopsis')
+            ->add('sinopsis', 'textarea')
         ;
     }
     

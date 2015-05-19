@@ -13,14 +13,25 @@
     </li>
 </ul>
 
-<script>
-	$(document).ready(function()
-	{
-		$("#appbundle_titulos_upload_photo").uploadFile({
-		url:"YOUR_FILE_UPLOAD_URL",
-		fileName:"myfile"
-		});
-	});
+<script type="text/javascript">
+$(function(){
+    // le seteo imagen si ya tiene cargada
+    var imagen = '<img src="/uploads/titulo/{{ entity.id }}.jpg" width="100">'
+    $("#imagen_subida").html(imagen);
+
+    // inicio el fileuploader
+    $("#fileuploader").uploadFile({
+        url:"{{ url('admin_upload_pic') }}",
+        fileName:"myfile",
+        onSuccess:function(files,data,xhr)
+        {
+            $("#nombreArchivo").val(files);
+            var imagen = '<img src="/uploads/temp/' + files + '" width="100">';
+            $("#imagen_subida").html(imagen);
+        }
+    });
+
+});
 </script>
 
 {% endblock %}

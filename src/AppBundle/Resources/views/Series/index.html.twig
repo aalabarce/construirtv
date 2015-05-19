@@ -7,22 +7,26 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Acciones</th>
+                <th class="text-center">Editar</th>
+                <th class="text-center">Eliminar</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('series_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
-                <td>
+            <tr id="entity_{{ entity.id }}">
+                <td>{{ entity.nombre }}</td>
+                <td class="text-center">
                     <a href="{{ path('series_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                </td>
+                <td class="text-center">
+                    <a href="javascript: destroy({{ entity.id }})"><span class="glyphicon glyphicon-remove"></span></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
+    <ul>
         <li>
             <a href="{{ path('series_new') }}">
                 Crear un nuevo registro

@@ -13,28 +13,32 @@
                 <th>Subtitulado</th>
                 <th>URL de vimeo</th>
                 <th>Destacado</th>
-                <th>Acciones</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('titulos_show', { 'id': entity.id }) }}">{{ entity.nombre }}</a></td>
+            <tr id="entity_{{ entity.id }}">
+                <td>{{ entity.nombre }}</td>
                 <td>{{ entity.nroCapitulo }}</td>
                 <td>{{ entity.duracion }}</td>
                 <td>{{ entity.temporada }}</td>
-                <td>{{ entity.subtitulado }}</td>
+                <td>{{ entity.subtitulado == "1" ? "S&iacute;": "No" }}</td>
                 <td>{{ entity.urlVimeo }}</td>
-                <td>{{ entity.destacado }}</td>
-                <td>
+                <td>{{ entity.destacado == "1" ? "S&iacute;": "No" }}</td>
+                <td class="text-center">
                     <a href="{{ path('titulos_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                </td>
+                <td class="text-center">
+                    <a href="javascript: destroy({{ entity.id }})"><span class="glyphicon glyphicon-remove"></span></a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
+    <ul>
         <li>
             <a href="{{ path('titulos_new') }}">
                 Crear un nuevo registro

@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Series;
 use AppBundle\Form\SeriesType;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 /**
  * Series controller.
  *
@@ -15,12 +17,6 @@ use AppBundle\Form\SeriesType;
 class SeriesController extends Controller
 {
 
-    public function obtenerSeriesAction()
-    {
-       
-    }
-
-    
     /**
      * Lists all Series entities.
      *
@@ -73,7 +69,7 @@ class SeriesController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crear'));
 
         return $form;
     }
@@ -153,7 +149,7 @@ class SeriesController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
 
         return $form;
     }
@@ -178,7 +174,8 @@ class SeriesController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('series_edit', array('id' => $id)));
+            return new RedirectResponse($this->generateUrl('titulos'));
+            //return $this->redirect($this->generateUrl('series_edit', array('id' => $id)));
         }
 
         return $this->render('AppBundle:Series:edit.html.twig', array(
@@ -193,20 +190,20 @@ class SeriesController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
+        /*$form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Series')->find($id);
+        if ($form->isValid()) {*/
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('AppBundle:Series')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Series entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Series entity.');
         }
+
+        $em->remove($entity);
+        $em->flush();
+        //}
 
         return $this->redirect($this->generateUrl('series'));
     }

@@ -66,3 +66,8 @@ api_buscador:
     path: api/buscar/{query}
     defaults: { _controller: "AppBundle:Api:buscador" }
     methods: GET
+
+admin_upload_pic:
+    path:     /upload
+    defaults: { _controller: "AppBundle:Default:subirImagen" }
+    requirements: { _method: post }

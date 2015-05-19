@@ -1,28 +1,6 @@
 {% extends '::base_crud.html.twig' %}
 
 {% block body -%}
-    <h1>Series</h1>
+    <h2>¡La serie ha sido creada exitosamente! Haga <a href="{{ url('series') }}">click aqu&iacute;</a> para volver al listado.</h2>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Nombre:&nbsp; </th>
-                <td>{{ entity.nombre }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('series') }}">
-            Volver al listado
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('series_edit', { 'id': entity.id }) }}">
-            Editar
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

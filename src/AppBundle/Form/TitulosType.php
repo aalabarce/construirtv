@@ -20,12 +20,12 @@ class TitulosType extends AbstractType
             ->add('duracion')
             ->add('temporada')
             ->add('subtitulado')
-            ->add('sinopsis')
-            ->add('urlVimeo')
+            ->add('sinopsis', 'textarea')
+            ->add('urlVimeo',null,array('label' => 'URL Vimeo: Ejemplo: para la URL vimeo.com/20611693 ingresar 20611693. (Únicamente se deben copiar los números despues de la barra)'))
             ->add('destacado')
             ->add('genero')
             ->add('serie')
-            ->add('upload_photo', new UploadPhotoType())
+            ->add('upload_photo', new UploadPhotoType(), array('label' => "Imagen: (medidas recomendadas: 450x300 px)"))
 
         ;
     }

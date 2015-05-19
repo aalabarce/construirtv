@@ -3,10 +3,13 @@
 namespace AppBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Titulos;
 use AppBundle\Form\TitulosType;
+
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Titulos controller.
@@ -51,7 +54,7 @@ class TitulosController extends Controller
             if (!empty($nombreArchivo))
             {
                 $pathTemporal = $_SERVER['DOCUMENT_ROOT'] . "/uploads/temp/" . $nombreArchivo;
-                $path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/" . $entity->getId() . ".jpg";
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/titulo/" . $entity->getId() . ".jpg";
 
                 // Renombro y muevo la imagen (Le pongo de nombre el id, y de extension jpg)
                 rename($pathTemporal, $path);
@@ -89,7 +92,7 @@ class TitulosController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crear'));
 
         return $form;
     }
@@ -169,7 +172,7 @@ class TitulosController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
 
         return $form;
     }
@@ -179,6 +182,10 @@ class TitulosController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        // Recibo el nombre de las imagenes subidas
+        $nombreArchivo = $request->request->get('nombreArchivo');
+        $nombreArchivoCarousel = $request->request->get('nombreArchivoCarousel');
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Titulos')->find($id);
@@ -194,7 +201,26 @@ class TitulosController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('titulos_edit', array('id' => $id)));
+            if (!empty($nombreArchivo))
+            {
+                $pathTemporal = $_SERVER['DOCUMENT_ROOT'] . "/uploads/temp/" . $nombreArchivo;
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/titulo/" . $entity->getId() . ".jpg";
+
+                // Renombro y muevo la imagen (Le pongo de nombre el id, y de extension jpg)
+                rename($pathTemporal, $path);
+            }
+
+            if(!empty($nombreArchivoCarousel))
+            {
+                $pathTemporal = $_SERVER['DOCUMENT_ROOT'] . "/uploads/temp/" . $nombreArchivoCarousel;
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/carousel/" . $entity->getId() . ".jpg";
+
+                // Renombro y muevo la imagen (Le pongo de nombre el id, y de extension jpg)
+                rename($pathTemporal, $path);
+            }
+
+            //return $this->redirect($this->generateUrl('titulos_edit', array('id' => $id)));
+            return new RedirectResponse($this->generateUrl('titulos'));
         }
 
         return $this->render('AppBundle:Titulos:edit.html.twig', array(
@@ -247,7 +273,7 @@ class TitulosController extends Controller
             $destacado = 1;
         }
 
-        $product->setDestacado($destacado);
+        $titulo->setDestacado($destacado);
         $em->flush();
 
         $jsonContent = '{ "result": "success" }';
@@ -255,45 +281,6 @@ class TitulosController extends Controller
         $response->headers->set('Content-Type', 'application/json');
     }
 
-    /**
-    *   Sube una imagen de un corto a la carpeta temporal, para despues cuando es confirmado el cambio
-    *   es movida a la ruta definitiva
-    **/
-    public function subirImagenAction()
-    {
-
-        // outputdir: C:\wamp\www\bw\uploads\\temp\\
-        $output_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/temp/";
-        if(isset($_FILES["myfile"]))
-        {
-            $ret = array();
-
-            $error =$_FILES["myfile"]["error"];
-            //You need to handle  both cases
-            //If Any browser does not support serializing of multiple files using FormData() 
-            if(!is_array($_FILES["myfile"]["name"])) //single file
-            {
-                $fileName = $_FILES["myfile"]["name"];
-                move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.$fileName);
-                $ret[]= $fileName;
-            }
-            else  //Multiple files, file[]
-            {
-              $fileCount = count($_FILES["myfile"]["name"]);
-              for($i=0; $i < $fileCount; $i++)
-              {
-                $fileName = $_FILES["myfile"]["name"][$i];
-                move_uploaded_file($_FILES["myfile"]["tmp_name"][$i],$output_dir.$fileName);
-                $ret[]= $fileName;
-              }
-            
-            }
-            $response = new Response(json_encode($ret));
-            $response->headers->set('Content-Type', 'application/json'); 
-
-            return $response;
-         }
-    }
 
     /**
      * Creates a form to delete a Titulos entity by id.

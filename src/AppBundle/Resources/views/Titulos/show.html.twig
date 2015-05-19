@@ -1,56 +1,5 @@
 {% extends '::base_crud.html.twig' %}
 
 {% block body -%}
-    <h1>Titulos</h1>
-
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Nombre:&nbsp;</th>
-                <td>{{ entity.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Nro de capitulo:&nbsp;</th>
-                <td>{{ entity.nroCapitulo }}</td>
-            </tr>
-            <tr>
-                <th>Duracion:&nbsp;</th>
-                <td>{{ entity.duracion }}</td>
-            </tr>
-            <tr>
-                <th>Temporada:&nbsp;</th>
-                <td>{{ entity.temporada }}</td>
-            </tr>
-            <tr>
-                <th>Subtitulado:&nbsp;</th>
-                <td>{{ entity.subtitulado == "1" ? "S&iacute;": "No" }}</td>
-            </tr>
-            <tr>
-                <th>Sinopsis:&nbsp;</th>
-                <td>{{ entity.sinopsis }}</td>
-            </tr>
-            <tr>
-                <th>URL de vimeo:&nbsp;</th>
-                <td>{{ entity.urlVimeo }}</td>
-            </tr>
-            <tr>
-                <th>Destacado:&nbsp;</th>
-                <td>{{ entity.destacado == "1" ? "S&iacute;": "No" }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('titulos') }}">
-            Volver al listado
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('titulos_edit', { 'id': entity.id }) }}">
-            Editar
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <h2>¡El titulo ha sido creado exitosamente! Haga <a href="{{ url('titulos') }}">click aqu&iacute;</a> para volver al listado.</h2>
 {% endblock %}

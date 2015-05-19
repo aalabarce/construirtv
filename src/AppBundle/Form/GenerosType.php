@@ -16,6 +16,7 @@ class GenerosType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('upload_photo', new UploadPhotoType(), array('label' => "Imagen: (medidas recomendadas: 200x260 px)"))
         ;
     }
     

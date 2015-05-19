@@ -33,8 +33,3 @@ titulos_toggle_destacado:
     path: /toggle_destacado/{id}
     defaults: { _controller: "AppBundle:Titulos:toggleDestacado" }
     methods: POST
-
-admin_titulo_upload_pic:
-    path:     /upload
-    defaults: { _controller: "AppBundle:Titulos:subirImagen" }
-    requirements: { _method: post }

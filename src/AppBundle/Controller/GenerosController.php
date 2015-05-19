@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Generos;
 use AppBundle\Form\GenerosType;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 /**
  * Generos controller.
  *
@@ -35,6 +37,9 @@ class GenerosController extends Controller
      */
     public function createAction(Request $request)
     {
+        // Recibo el nombre de las imagenes subidas
+        $nombreArchivo = $request->request->get('nombreArchivo');
+
         $entity = new Generos();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -43,6 +48,15 @@ class GenerosController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            if (!empty($nombreArchivo))
+            {
+                $pathTemporal = $_SERVER['DOCUMENT_ROOT'] . "/uploads/temp/" . $nombreArchivo;
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/genero/" . $entity->getId() . ".jpg";
+
+                // Renombro y muevo la imagen (Le pongo de nombre el id, y de extension jpg)
+                rename($pathTemporal, $path);
+            }
 
             return $this->redirect($this->generateUrl('generos_show', array('id' => $entity->getId())));
         }
@@ -67,7 +81,7 @@ class GenerosController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crear'));
 
         return $form;
     }
@@ -147,7 +161,7 @@ class GenerosController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
 
         return $form;
     }
@@ -157,6 +171,8 @@ class GenerosController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        $nombreArchivo = $request->request->get('nombreArchivo');
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Generos')->find($id);
@@ -172,7 +188,17 @@ class GenerosController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('generos_edit', array('id' => $id)));
+            if (!empty($nombreArchivo))
+            {
+                $pathTemporal = $_SERVER['DOCUMENT_ROOT'] . "/uploads/temp/" . $nombreArchivo;
+                $path = $_SERVER['DOCUMENT_ROOT'] . "/uploads/genero/" . $entity->getId() . ".jpg";
+
+                // Renombro y muevo la imagen (Le pongo de nombre el id, y de extension jpg)
+                rename($pathTemporal, $path);
+            }
+
+            return new RedirectResponse($this->generateUrl('generos'));
+            //return $this->redirect($this->generateUrl('generos_edit', array('id' => $id)));
         }
 
         return $this->render('AppBundle:Generos:edit.html.twig', array(

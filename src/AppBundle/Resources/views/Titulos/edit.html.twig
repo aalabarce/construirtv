@@ -18,8 +18,13 @@
 $(function(){
 	// le seteo imagen si ya tiene cargada
 	var imagen = '<img src="/uploads/titulo/{{ entity.id }}.jpg" width="100">';
+	{% if entity.destacado == "1" %}
+    	var destacado = "1";
+    {% else %}
+    	var destacado = "0";
+	{% endif %}
 
-	if ({{entity.destacado}} == "1")
+	if (destacado == "1")
 	{
 		var imagen_carousel = '<img src="/uploads/carousel/{{ entity.id }}.jpg" width="100">';
 

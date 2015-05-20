@@ -47,7 +47,7 @@
     <header class="navbar navbar-default navbar-fixed-top headerMain" ng-controller="HeaderCtrl">
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8 logoHeader">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/web/#/">
             <img class="img-responsive" src="/web/images/logo.png" alt="" />
           </a>
         </div>

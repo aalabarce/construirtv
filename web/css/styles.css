@@ -902,7 +902,7 @@ section.cat-movies .tab-content .item-listado-tab .thumb a .desc-item-listado p 
 
 /* DETALLE DEL PROYECTO */
 .bg-cemento{
-	background: url(../images/cemento.jpg) repeat;
+	background: url("../images/cemento.jpg") repeat;
 }
 section.main-cont{
 	overflow: hidden;

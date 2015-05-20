@@ -48,7 +48,7 @@
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-8 logoHeader">
           <a class="navbar-brand" href="#">
-            <img class="img-responsive" src="{{themeImagesSrc}}/logo.png" alt="" />
+            <img class="img-responsive" src="/web/images/logo.png" alt="" />
           </a>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-4 menuHeader">

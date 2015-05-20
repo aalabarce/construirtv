@@ -9,7 +9,7 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
     .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
       $routeProvider.
         when('/', {
-          templateUrl: '../templates/content.home.html',
+          templateUrl: '../web/templates/content.home.html',
           controller: 'HomeCtrl'
         }).
         /*
@@ -24,7 +24,7 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
         }).
         */
         when('/titles/:tituloId', {
-          templateUrl: '../templates/content.titulos.detail.html',
+          templateUrl: '../web/templates/content.titulos.detail.html',
           controller: 'TitulosDetailCtrl',
           resolve: {
             validateToken: ['$http','$rootScope', function($http, $rootScope) {
@@ -34,11 +34,11 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
           }
         }).
         when('/register', {
-          templateUrl: '../templates/content.registro.html',
+          templateUrl: '../web/templates/content.registro.html',
           controller: 'RegistroCtrl'
         }).
         when('/welcome', {
-          templateUrl: '../templates/content.welcome.html',
+          templateUrl: '../web/templates/content.welcome.html',
           controller: 'WelcomeCtrl'
         }).
         otherwise({

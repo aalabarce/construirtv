@@ -157,7 +157,7 @@
     </footer>
     <div class="clearfix"></div>
     <p class="copyright text-center">
-      Copyright © 2015  - All rights reserved - Power by <a href="http://walrussolutions.com/" target="_blank">Walrus Solutions</a>
+      Copyright © 2015  - All rights reserved - Powered by <a href="http://walrussolutions.com/" target="_blank">Walrus Solutions</a>
     </p>
   </div>
 	

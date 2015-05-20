@@ -429,12 +429,31 @@ angular.module('construirTVControllers', [])
     
     var token = document.getElementById("fos_user_registration_form__token").value; // Get token value from the form returned by the firt API call
 
-    $.post( $rootScope.serverURL + "/register/", { 'fos_user_registration_form[email]': $scope.userEmailImput, 'fos_user_registration_form[username]': $scope.userNamelImput, 'fos_user_registration_form[plainPassword][first]': $scope.userPassImput, 'fos_user_registration_form[plainPassword][second]': $scope.userPass2Imput, 'fos_user_registration_form[_token]': token}, "json")
-    .success(function(data) {
-      $scope.registrationData = data;
-      $scope.checkForErrors(data);
+    $http({
+        method: 'POST',
+        url: $rootScope.serverURL + "/register/",
+        data: {
+          'fos_user_registration_form[email]': $scope.userEmailImput,
+          'fos_user_registration_form[username]': $scope.userNamelImput,
+          'fos_user_registration_form[plainPassword][first]': $scope.userPassImput,
+          'fos_user_registration_form[plainPassword][second]': $scope.userPass2Imput,
+          'fos_user_registration_form[_token]': token
+        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        transformRequest: function(obj) {
+        var str = [];
+        for(var p in obj)
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+        return str.join("&");
+      }
+    })
+    .success(function(data, status){
+        $scope.checkForErrors(data);
+        console.log(data, status);  //remove for production
+    })
+    .error(function(data, status){
+        console.log(data, status); //remove for production
     });
-
   }
   // ***** END REGISTER USER *****
 
@@ -470,7 +489,7 @@ angular.module('construirTVControllers', [])
     // No errors
     if($scope.emailUsed == false && $scope.emailInvalid == false && $scope.userlUsed == false && $scope.passwordsNotMatching == false && $scope.passwordsTooShort == false) {
       $scope.userLoginAfterRegistration($scope.userEmailImput, $scope.userPassImput); // Log in the user
-      $location.path("/").replace(); // Redirect to home after login
+      $location.path("/welcome").replace(); // Redirect to welcome after login
     }
 
   }

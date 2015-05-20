@@ -71,13 +71,13 @@ angular.module('construirTV', ['ngRoute', 'ui.bootstrap', 'construirTVController
       $rootScope.userName = window.localStorage['user_name'];
 
       //if($location.path())
-      if($location.host() == "bloodwindow.tv") { // For production
+      if($location.host() == "construir.tv") { // For production
         $rootScope.serverURL = "/web"; // URL for real app
         $rootScope.imagesSrc = "/uploads";
         $rootScope.themeImagesSrc = "/web/images";
       } else { // For development
         $rootScope.serverURL = "/web/app_dev.php"; // URL for working local
-        $rootScope.imagesSrc = "/web/uploads/";
+        $rootScope.imagesSrc = "/uploads";
         $rootScope.themeImagesSrc = "/web/images";
       }
     }]);

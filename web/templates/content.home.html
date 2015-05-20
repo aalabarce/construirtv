@@ -20,7 +20,7 @@
 							<div class="detail-info-item col-lg-3 col-md-3 col-sm-3 col-xs-3">
 								<p class="titulo-serie">Titulo de la serie: <b>{{slide.serie.nombre}}</b> </p>
 								<p class="genero">Genero: <b>{{slide.genero.nombre}}</b></p>
-								<p class="duracion">Duracion: <b>{{slide.duracion}}</b></p>
+								<p class="duracion">Duracion: <b>{{slide.duracion}}'</b></p>
 							</div>
 	            		</div>
 	            	</div>
@@ -92,7 +92,7 @@
 	        				<h3>{{title.nombre}}</h3>
 	        				<p ng-show="title.genero">{{languageHome.gender}}: <span>{{title.genero.nombre}}</span></p>
 	        				<p ng-show="title.serie">{{languageHome.series}}: <span>{{title.serie.nombre}}</span></p>
-	        				<p ng-show="title.duracion">{{languageHome.duration}}: <span>{{title.duracion}}</span></p>
+	        				<p ng-show="title.duracion">{{languageHome.duration}}: <span>{{title.duracion}}'</span></p>
 	        			</div>
 	        			<img ng-src="{{imagesSrc}}/titulo/{{title.id}}.jpg" class="img-responsive">
 	        		</a>

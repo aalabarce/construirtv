@@ -174,7 +174,7 @@ class SeriesController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return new RedirectResponse($this->generateUrl('titulos'));
+            return new RedirectResponse($this->generateUrl('series'));
             //return $this->redirect($this->generateUrl('series_edit', array('id' => $id)));
         }
 

@@ -213,10 +213,10 @@ class GenerosController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+       // $form = $this->createDeleteForm($id);
+       // $form->handleRequest($request);
 
-        if ($form->isValid()) {
+       // if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('AppBundle:Generos')->find($id);
 
@@ -226,7 +226,7 @@ class GenerosController extends Controller
 
             $em->remove($entity);
             $em->flush();
-        }
+       // }
 
         return $this->redirect($this->generateUrl('generos'));
     }

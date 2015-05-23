@@ -16,7 +16,24 @@
 <script type="text/javascript">
 $(function(){
     // le seteo imagen si ya tiene cargada
-    var imagen = '<img src="/uploads/titulo/{{ entity.id }}.jpg" width="100">'
+    var imagen = '<img src="/uploads/titulo/{{ entity.id }}.jpg" width="100">';
+    var imagen_carousel = '<img src="/uploads/carousel/{{ entity.id }}.jpg" width="100">';
+
+    $("#upload_carousel").removeClass("hidden");
+
+    $("#fileuploader_carousel").uploadFile({
+        url:"{{ url('admin_upload_pic') }}",
+        fileName:"myfile",
+        onSuccess:function(files,data,xhr)
+        {
+            $("#nombreArchivoCarousel").val(files);
+            var imagen = '<img src="/uploads/temp/' + files + '" width="100">';
+            $("#imagen_subida_carousel").html(imagen);
+        }
+    });
+
+    $("#imagen_subida_carousel").html(imagen_carousel);
+
     $("#imagen_subida").html(imagen);
 
     // inicio el fileuploader

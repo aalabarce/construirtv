@@ -25,7 +25,7 @@ class TitulosType extends AbstractType
             ->add('destacado')
             ->add('genero')
             ->add('serie')
-            ->add('upload_photo', new UploadPhotoType(), array('label' => "Imagen: (medidas recomendadas: 450x300 px)"))
+            ->add('upload_photo', new UploadPhotoType(), array('label' => "Imagen: (medidas recomendadas: 930x620 px)"))
 
         ;
     }

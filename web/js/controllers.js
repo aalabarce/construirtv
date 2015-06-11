@@ -427,7 +427,8 @@ angular.module('construirTVControllers', [])
     //var passFirst = document.getElementById("fos_user_registration_form_plainPassword_first").value; // Get first pass value from form
     //var passSecond = document.getElementById("fos_user_registration_form_plainPassword_second").value; // Get second pass value from form
     
-    var token = document.getElementById("fos_user_registration_form__token").value; // Get token value from the form returned by the firt API call
+    // UNCOMENT WHEN USING TOKEN
+    //var token = document.getElementById("fos_user_registration_form__token").value; // Get token value from the form returned by the firt API call
 
     $http({
         method: 'POST',
@@ -436,8 +437,8 @@ angular.module('construirTVControllers', [])
           'fos_user_registration_form[email]': $scope.userEmailImput,
           'fos_user_registration_form[username]': $scope.userNamelImput,
           'fos_user_registration_form[plainPassword][first]': $scope.userPassImput,
-          'fos_user_registration_form[plainPassword][second]': $scope.userPass2Imput,
-          'fos_user_registration_form[_token]': token
+          'fos_user_registration_form[plainPassword][second]': $scope.userPass2Imput
+          //'fos_user_registration_form[_token]': token       UNCOMENT WHEN USING TOKEN
         },
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         transformRequest: function(obj) {

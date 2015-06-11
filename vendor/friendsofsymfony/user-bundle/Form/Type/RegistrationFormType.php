@@ -47,6 +47,7 @@ class RegistrationFormType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'intention'  => 'registration',
+            'csrf_protection'  => false,
         ));
     }
 

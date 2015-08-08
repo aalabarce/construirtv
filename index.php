@@ -1,4 +1,4 @@
 <?php
-header("Location: http://construir.tv/web");
+//header("Location: http://localhost/construirtv/web");
 die();
 ?>

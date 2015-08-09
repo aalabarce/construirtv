@@ -23,6 +23,7 @@ class TitulosType extends AbstractType
             ->add('sinopsis', 'textarea')
             ->add('urlVimeo',null,array('label' => 'URL Vimeo: Ejemplo: para la URL vimeo.com/20611693 ingresar 20611693. (Únicamente se deben copiar los números despues de la barra)'))
             ->add('destacado')
+            ->add('oculto')
             ->add('genero')
             ->add('serie')
             ->add('upload_photo', new UploadPhotoType(), array('label' => "Imagen: (medidas recomendadas: 930x620 px)"))

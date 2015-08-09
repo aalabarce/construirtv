@@ -73,7 +73,7 @@ class ApiController extends Controller
 
     public function obtenerTitulosAction()
     {
-        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findAll();
+        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('oculto' => 0));
         
         $encoders = array(new JsonEncoder());
         $normalizers = array(new GetSetMethodNormalizer());
@@ -89,7 +89,7 @@ class ApiController extends Controller
 
     public function obtenerTitulosPorSerieAction($serie_id)
     {
-        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('serie' => $serie_id));
+        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('serie' => $serie_id, 'oculto' => 0));
 
         $encoders = array(new JsonEncoder());
         $normalizers = array(new GetSetMethodNormalizer());
@@ -105,7 +105,7 @@ class ApiController extends Controller
 
     public function obtenerTitulosPorGeneroAction($genero_id)
     {
-        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('genero' => $genero_id));
+        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('genero' => $genero_id, 'oculto' => 0));
 
         $encoders = array(new JsonEncoder());
         $normalizers = array(new GetSetMethodNormalizer());
@@ -145,7 +145,7 @@ class ApiController extends Controller
 
     public function obtenerTitulosDestacadosAction()
     {
-        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('destacado' => 1));
+        $titulos = $this->getDoctrine()->getRepository('AppBundle:Titulos')->findBy(array('destacado' => 1, 'oculto' => 0));
 
         $encoders = array(new JsonEncoder());
         $normalizers = array(new GetSetMethodNormalizer());
@@ -173,6 +173,7 @@ class ApiController extends Controller
             ->orWhere('t.sinopsis LIKE :query')
             ->orWhere('s.nombre LIKE :query')
             ->orWhere('g.nombre LIKE :query')
+            ->andWhere('t.oculto = 0')
             ->setParameter('query', '%'. $query .'%')
             ->getQuery();
          

@@ -50,6 +50,11 @@ class Titulos
     private $destacado;
 
     /**
+     * @var boolean
+     */
+    private $oculto;
+
+    /**
      * @var integer
      */
     private $id;
@@ -254,6 +259,29 @@ class Titulos
     public function getDestacado()
     {
         return $this->destacado;
+    }
+
+    /**
+     * Set oculto
+     *
+     * @param boolean $oculto
+     * @return Titulos
+     */
+    public function setOculto($oculto)
+    {
+        $this->oculto = $oculto;
+
+        return $this;
+    }
+
+    /**
+     * Get oculto
+     *
+     * @return boolean 
+     */
+    public function getOculto()
+    {
+        return $this->oculto;
     }
 
     /**

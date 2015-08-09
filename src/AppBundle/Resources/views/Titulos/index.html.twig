@@ -13,6 +13,7 @@
                 <th>Subtitulado</th>
                 <th>URL de vimeo</th>
                 <th>Destacado</th>
+                <th>Oculto</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
@@ -27,6 +28,7 @@
                 <td>{{ entity.subtitulado == "1" ? "S&iacute;": "No" }}</td>
                 <td>{{ entity.urlVimeo }}</td>
                 <td>{{ entity.destacado == "1" ? "S&iacute;": "No" }}</td>
+                <td>{{ entity.oculto == "1" ? "S&iacute;": "No" }}</td>
                 <td class="text-center">
                     <a href="{{ path('titulos_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
                 </td>

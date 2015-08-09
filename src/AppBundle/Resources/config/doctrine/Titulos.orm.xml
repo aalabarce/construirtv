@@ -17,6 +17,7 @@
     <field name="sinopsis" type="string" column="sinopsis" length="4000" nullable="true"/>
     <field name="urlVimeo" type="string" column="url_vimeo" length="100" nullable="true"/>
     <field name="destacado" type="boolean" column="destacado" nullable="true"/>
+    <field name="oculto" type="boolean" column="oculto" nullable="true"/>
     <many-to-one field="genero" target-entity="Generos">
       <join-columns>
         <join-column name="genero_id" referenced-column-name="id"/>

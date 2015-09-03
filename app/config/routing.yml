@@ -71,3 +71,8 @@ admin_upload_pic:
     path:     /upload
     defaults: { _controller: "AppBundle:Default:subirImagen" }
     requirements: { _method: post }
+
+estadisticas:
+    path: /estadisticas/list
+    defaults: { _controller: "AppBundle:Default:estadisticas" }
+    methods: GET

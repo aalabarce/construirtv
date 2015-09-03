@@ -53,4 +53,28 @@ class DefaultController extends Controller
          }
     }
 
+    public function estadisticasAction()
+    {
+        $em = $this->getDoctrine()->getRepository('AppBundle:Usuario');
+
+        $qb = $em->createQueryBuilder('u')
+              ->select('COUNT(u.username)');
+
+        //$cantidad_suscriptores = array('Cantidad de suscriptores' => $qb->getQuery()->getResult()[0][1]);
+        $cantidad_suscriptores = $qb->getQuery()->getResult()[0][1];
+
+        /*$estadisticas = array();
+
+        array_push($estadisticas, $cantidad_suscriptores);
+        
+        return $this->render('AppBundle:Default:estadisticas.html.twig', array(
+            'estadisticas' => $estadisticas,
+        ));
+        */
+        return $this->render('AppBundle:Default:estadisticas.html.twig', array(
+            'cantidad_suscriptores' => $cantidad_suscriptores,
+        ));
+
+    }
+
 }

@@ -61,7 +61,8 @@ class DefaultController extends Controller
               ->select('COUNT(u.username)');
 
         //$cantidad_suscriptores = array('Cantidad de suscriptores' => $qb->getQuery()->getResult()[0][1]);
-        $cantidad_suscriptores = $qb->getQuery()->getResult()[0][1];
+        $cantidad_suscriptores = $qb->getQuery()->getResult();
+        $cantidad_suscriptores = $cantidad_suscriptores[0][1];
 
         /*$estadisticas = array();
 
